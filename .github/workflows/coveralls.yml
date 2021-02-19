@@ -11,7 +11,7 @@ jobs:
         with:
           node-versoin: 14
       - run: npm install
-      - run: 'npm coverage:all'
+      - run: 'npm run coverage:all'
       - name: Coveralls
         uses: coverallsapp/github-action@master
         with:

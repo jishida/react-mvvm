@@ -20,4 +20,4 @@ jobs:
         with:
           node-versoin: ${{ matrix.node_version }}
       - run: npm install
-      - run: 'npm test:all'
+      - run: 'npm run test:all'
