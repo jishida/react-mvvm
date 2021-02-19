@@ -1,7 +1,8 @@
 # React MVVM
 
-[![](https://img.shields.io/npm/v/@jishida/react-mvvm)](https://www.npmjs.com/package/@jishida/react-mvvm)
-[![](https://img.shields.io/badge/license-Apache--2.0-blue)](http://www.apache.org/licenses/LICENSE-2.0)
+[![npm version](https://img.shields.io/npm/v/@jishida/react-mvvm)](https://www.npmjs.com/package/@jishida/react-mvvm)
+[![Coverage Status](https://coveralls.io/repos/github/jishida/react-mvvm/badge.svg?branch=master)](https://coveralls.io/github/jishida/react-mvvm?branch=master)
+[![license: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-blue)](http://www.apache.org/licenses/LICENSE-2.0)
 
 ## Features
 
