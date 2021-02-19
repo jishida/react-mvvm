@@ -25,4 +25,5 @@ async function run(name) {
     });
   });
 }
-await run(process.argv[2]);
+
+run(process.argv[2]);
