@@ -1,6 +1,7 @@
 # React MVVM
 
 [![npm version](https://img.shields.io/npm/v/@jishida/react-mvvm)](https://www.npmjs.com/package/@jishida/react-mvvm)
+[![CI](https://github.com/jishida/react-mvvm/actions/workflows/ci.yml/badge.svg)](https://github.com/jishida/react-mvvm/actions/workflows/ci.yml)
 [![Coverage Status](https://coveralls.io/repos/github/jishida/react-mvvm/badge.svg?branch=master)](https://coveralls.io/github/jishida/react-mvvm?branch=master)
 [![license: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-blue)](http://www.apache.org/licenses/LICENSE-2.0)
 
