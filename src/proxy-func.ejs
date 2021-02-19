@@ -1,0 +1,57 @@
+import {
+  DependencyValue,
+  Mandatory,
+  Observable,
+  Ref,
+  Result,
+  ViewModel,
+  ViewModelObject,
+} from './interfaces';
+import { Validatable } from './validators';
+import {
+  RefProxy,
+  ResultProxy,
+  StateProxy,
+  ValueProxy,
+  ViewModelMutableProxy,
+  ViewModelProxy,
+} from './proxy';
+
+export interface ProxyFunc {
+  <VM extends ViewModel>(viewModel: VM, filter: 'ref'): RefProxy<VM>;
+  <VM extends ViewModel>(viewModel: VM, filter: 'value'): ValueProxy<VM>;
+  <VM extends ViewModel>(viewModel: VM, filter: 'state'): StateProxy<VM>;
+  <VM extends ViewModel>(viewModel: VM, filter: 'result'): ResultProxy<VM>;
+  <VM extends ViewModel>(viewModel: VM, filter: 'error'): ViewModelMutableProxy<
+    VM,
+    boolean,
+    Validatable<any, any>
+  >;
+  <VM extends ViewModel>(viewModel: VM, filter: 'message'): ViewModelMutableProxy<
+    VM,
+    string,
+    Validatable<any, any>
+  >;
+  <VM extends ViewModel, T = unknown>(
+    viewModel: VM,
+    getFn: (prop: ViewModelObject) => T
+  ): ViewModelProxy<VM, T, ViewModelObject>;
+  <VM extends ViewModel, T = unknown>(
+    viewModel: VM,
+    getFn: (this: VM, prop: ViewModelObject, name: string) => T,
+    setFn: (this: VM, prop: ViewModelObject, name: string, value: T) => void
+  ): ViewModelMutableProxy<VM, T, ViewModelObject>;
+<% entries.forEach(({ filter, includeClass, excludeClass }) => { %>
+  <VM extends ViewModel, T = unknown>(
+    viewModel: VM,
+    filter: <%-filter%>,
+    getFn: (prop: <%-includeClass%>) => T
+  ): ViewModelProxy<VM, T, <%-includeClass%>, <%-excludeClass%>>;
+  <VM extends ViewModel, T = unknown>(
+    viewModel: VM,
+    filter: <%-filter%>,
+    getFn: (this: VM, prop: <%-includeClass%>, name: string) => T,
+    setFn: (this: VM, prop: <%-includeClass%>, name: string, value: T) => void
+  ): ViewModelMutableProxy<VM, T, <%-includeClass%>, <%-excludeClass%>>;
+<% }); %>
+}

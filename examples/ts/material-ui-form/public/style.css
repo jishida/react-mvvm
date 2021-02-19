@@ -1,0 +1,76 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  min-width: 320px;
+}
+
+.display {
+  width: 320px;
+}
+
+.display fieldset {
+  overflow: auto;
+  height: 10em;
+}
+
+.display fieldset p {
+  white-space: pre-wrap;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  width: 320px;
+}
+
+.form-button {
+  display: flex;
+  flex-direction: row;
+  margin: 10px 0;
+}
+
+.form-button .MuiButton-root {
+  margin-right: 5px;
+  width: 100px;
+}
+
+.form-button .MuiButton-root:last-child {
+  margin-right: 0;
+}
+
+.form-item .MuiTextField-root {
+  width: 200px;
+}
+
+@media screen and (min-width: 640px) {
+  .content {
+    flex-direction: row;
+  }
+
+  .display {
+    flex-grow: 1;
+    width: auto;
+    order: 1;
+  }
+
+  .display fieldset {
+    height: auto;
+    min-height: 12em;
+  }
+
+  .form-container {
+    order: 0;
+  }
+}
+
+@media screen and (min-width: 720px) {
+  .content {
+    width: 720px;
+  }
+}
+
+@media screen and (min-width: 640px) and (max-widht: 720px) {
+  .content {
+    width: auto;
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "paths": {
+      "react": ["./shims/react.js"],
+      "react-dom": ["./shims/react-dom.js"],
+      "@jishida/react-mvvm": ["./shims/react-mvvm.js"]
+    }
+  }
+}

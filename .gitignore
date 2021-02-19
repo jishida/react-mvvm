@@ -1,0 +1,13 @@
+.vscode/
+.cache/
+node_modules/
+build/
+dist/
+cjs/
+esm/
+types/
+coverage/
+types/impl/
+*.tgz
+*.tsbuildinfo
+!examples/dist/

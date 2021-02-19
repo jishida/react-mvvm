@@ -1,0 +1,11 @@
+{
+  "include": ["."],
+  "compilerOptions": {
+    "outDir": "build",
+    "target": "es2020",
+    "module": "commonjs",
+    "strict": true,
+    "moduleResolution": "node",
+    "types": ["node", "ejs", "js-yaml"]
+  }
+}

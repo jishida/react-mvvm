@@ -1,0 +1,195 @@
+# ViewModelObject
+- include: []
+  exclude:
+    - []
+    - [ref]
+    - [result]
+    - [ref, result]
+    - [value]
+    - [value, ref]
+    - [value, result]
+    - [value, ref, result]
+    - [observable]
+    - [observable, ref]
+    - [observable, result]
+    - [observable, ref, result]
+    - [validatable]
+    - [validatable, ref]
+    - [validatable, result]
+    - [validatable, ref, result]
+    - [async]
+    - [async, ref]
+    - [async, result]
+    - [async, ref, result]
+# Ref<any>
+- include: [ref]
+  exclude:
+    - []
+    - [result]
+    - [value]
+    - [value, result]
+    - [observable]
+    - [observable, result]
+    - [validatable]
+    - [validatable, result]
+    - [async]
+    - [async, result]
+# Result<any>
+- include: [result]
+  exclude:
+    - []
+    - [ref]
+    - [value]
+    - [value, ref]
+    - [observable]
+    - [observable, ref]
+    - [validatable]
+    - [validatable, ref]
+    - [async]
+    - [async, ref]
+# Ref<any> & Result<any>
+- include: [ref, result]
+  exclude:
+    - []
+    - [value]
+    - [observable]
+    - [validatable]
+    - [async]
+# DependencyValue<any>
+- include: [value]
+  exclude:
+    - []
+    - [ref]
+    - [result]
+    - [ref, result]
+    - [observable]
+    - [observable, ref]
+    - [observable, result]
+    - [observable, ref, result]
+    - [validatable]
+    - [validatable, ref]
+    - [validatable, result]
+    - [validatable, ref, result]
+    - [async]
+    - [async, ref]
+    - [async, result]
+    - [async, ref, result]
+# DependencyValue<any> & Ref<any>
+- include: [value, ref]
+  exclude:
+    - []
+    - [result]
+    - [observable]
+    - [observable, result]
+    - [validatable]
+    - [validatable, result]
+    - [async]
+    - [async, result]
+# DependencyValue<any> & Result<any>
+- include: [value, result]
+  exclude:
+    - []
+    - [ref]
+    - [observable]
+    - [observable, ref]
+    - [validatable]
+    - [validatable, ref]
+    - [async]
+    - [async, ref]
+# DependencyValue<any> & Ref<any> & Result<any>
+- include: [value, ref, result]
+  exclude:
+    - []
+    - [observable]
+    - [validatable]
+    - [async]
+# Observable<any>
+- include: [observable]
+  exclude:
+    - []
+    - [ref]
+    - [result]
+    - [ref, result]
+    - [validatable]
+    - [validatable, ref]
+    - [validatable, result]
+    - [validatable, ref, result]
+    - [async]
+    - [async, ref]
+    - [async, result]
+    - [async, ref, result]
+# Observable<any> & Ref<any>
+- include: [observable, ref]
+  exclude:
+    - []
+    - [result]
+    - [validatable]
+    - [validatable, result]
+    - [async]
+    - [async, result]
+# Observable<any> & Result<any>
+- include: [observable, result]
+  exclude:
+    - []
+    - [ref]
+    - [validatable]
+    - [validatable, ref]
+    - [async]
+    - [async, ref]
+# Observable<any> & Ref<any> & Result<any>
+- include: [observable, ref, result]
+  exclude:
+    - []
+    - [validatable]
+    - [async]
+# Validatable<any, any>
+- include: [validatable]
+  exclude:
+    - []
+    - [ref]
+    - [result]
+    - [ref, result]
+    - [async]
+    - [async, ref]
+    - [async, result]
+    - [async, ref, result]
+# Validatable<any, any> & Ref<any>
+- include: [validatable, ref]
+  exclude:
+    - []
+    - [result]
+    - [async]
+    - [async, result]
+# Validatable<any, any> & Result<any>
+- include: [validatable, result]
+  exclude:
+    - []
+    - [ref]
+    - [async]
+    - [async, ref]
+# Validatable<any, any> & Ref<any> & Result<any>
+- include: [validatable, ref, result]
+  exclude:
+    - []
+    - [async]
+# Validatable<any, true>
+- include: [async]
+  exclude:
+    - []
+    - [ref]
+    - [result]
+    - [ref, result]
+# Validatable<any, true> & Ref<any>
+- include: [async, ref]
+  exclude:
+    - []
+    - [result]
+# Validatable<any, true> & AsyncResult<any>
+- include: [async, result]
+  exclude:
+    - []
+    - [ref]
+# Validatable<any, true> & Ref<any> & AsyncResult<any>
+- include: [async, ref, result]
+  exclude:
+    - []

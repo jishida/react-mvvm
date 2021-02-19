@@ -1,0 +1,15 @@
+{
+  "private": true,
+  "name": "lite",
+  "main": "cjs/index.js",
+  "module": "esm/index.js",
+  "types": "types/lite.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jishida/react-mvvm.git"
+  },
+  "peerDependencies": {
+    "@jishida/react-mvvm": "^0.1.0",
+    "react": "^16.8.0 || >= 17.0.0"
+  }
+}

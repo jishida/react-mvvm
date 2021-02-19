@@ -1,0 +1,16 @@
+{
+  "extends": "../tsconfig.json",
+  "include": ["."],
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    "esModuleInterop": true,
+    "types": ["react", "react-dom", "jest", "enzyme"],
+    "paths": {
+      "@jishida/react-mvvm": ["../src"],
+      "@jishida/react-mvvm/impl": ["../src/impl"],
+      "@jishida/react-mvvm/validators": ["../src/impl/validators"],
+      "@jishida/react-mvvm/proxy": ["../src/impl/proxy.ts"]
+    }
+  }
+}

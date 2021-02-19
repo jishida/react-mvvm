@@ -1,0 +1,101 @@
+{
+  "name": "@jishida/react-mvvm",
+  "version": "0.1.0",
+  "year": "2021",
+  "description": "Functions and components to help MVVM-like development for React.",
+  "source": "src/index.ts",
+  "main": "cjs/index.js",
+  "module": "esm/index.js",
+  "types": "types/index.d.ts",
+  "unpkg": "dist/react-mvvm.min.js",
+  "scripts": {
+    "prebuild": "npm run script prebuild",
+    "postbuild": "npm run script postbuild",
+    "build": "rollup -c",
+    "test": "jest",
+    "test:all": "npm run build && cross-env TEST_TYPES=all jest --verbose",
+    "coverage": "jest --coverage",
+    "coverage:all": "npm run build && cross-env TEST_TYPES=all jest --coverage --verbose",
+    "script": "node scripts/run-script.mjs",
+    "clean": "npm run script clean",
+    "examples:preinstall": "npm run script examples-preinstall",
+    "examples:dist:prebuild": "npm run script examples-dist-prebuild",
+    "examples:dist:build": "cd examples/dist && npm install && npm run build",
+    "examples:install": "npm run script examples-install",
+    "examples:update": "npm run script examples-update",
+    "examples:update-stopwatch": "npm run script examples-update-stopwatch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jishida/react-mvvm.git"
+  },
+  "keywords": [
+    "react",
+    "react-hooks",
+    "viewmodel",
+    "mvvm",
+    "state-manegement"
+  ],
+  "author": "Junki Ishida",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/jishida/react-mvvm/issues"
+  },
+  "homepage": "https://github.com/jishida/react-mvvm#readme",
+  "devDependencies": {
+    "@rollup/plugin-buble": "^0.21.3",
+    "@rollup/plugin-typescript": "^6.1.0",
+    "@types/ejs": "^3.0.6",
+    "@types/enzyme": "^3.10.8",
+    "@types/enzyme-adapter-react-16": "^1.0.6",
+    "@types/jest": "^26.0.20",
+    "@types/js-yaml": "^4.0.0",
+    "@types/react": "^16.14.4",
+    "@types/react-dom": "^16.9.11",
+    "@typescript-eslint/eslint-plugin": "^4.15.1",
+    "@typescript-eslint/parser": "^4.15.1",
+    "acorn": "^6.4.2",
+    "cross-env": "^7.0.3",
+    "dotenv": "^8.2.0",
+    "ejs": "^3.1.6",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-preact-pure": "^2.3.0",
+    "enzyme-adapter-react-16": "^1.15.6",
+    "eslint": "^7.20.0",
+    "eslint-config-airbnb-typescript": "^12.3.1",
+    "eslint-config-prettier": "^6.15.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-react": "^7.22.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "gzip-size": "^6.0.0",
+    "jest": "^26.6.3",
+    "js-yaml": "^4.0.0",
+    "preact": "^10.5.12",
+    "prettier": "^2.2.1",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0",
+    "rollup": "^2.39.0",
+    "rollup-plugin-bundle-size": "^1.0.3",
+    "rollup-plugin-terser": "^7.0.2",
+    "ts-jest": "^26.5.1",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.1.5"
+  },
+  "peerDependencies": {
+    "@types/react": "^16.8.0 || ^17.0.0",
+    "react": "^16.8.0 || ^17.0.0",
+    "preact": "^10.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@types/react": {
+      "optional": true
+    },
+    "react": {
+      "optional": true
+    },
+    "preact": {
+      "optional": true
+    }
+  }
+}

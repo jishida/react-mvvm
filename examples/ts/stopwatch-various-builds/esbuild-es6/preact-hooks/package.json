@@ -1,0 +1,21 @@
+{
+  "private": true,
+  "name": "stopwatch",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "build": "node build.js",
+    "preinstall": "cd ../../../../.. && npm run examples:preinstall"
+  },
+  "author": "Junki Ishida",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "esbuild": "^0.8.32",
+    "preact": "^10.5.10"
+  },
+  "dependencies": {
+    "@jishida/react-mvvm": "file:../../../../../jishida-react-mvvm-0.1.0.tgz",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
+  }
+}

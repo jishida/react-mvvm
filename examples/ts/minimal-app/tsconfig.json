@@ -1,0 +1,14 @@
+{
+  "include": ["src"],
+  "compilerOptions": {
+    "module": "esnext",
+    "target": "esnext",
+    "jsx":"preserve",
+    "moduleResolution": "node",
+    "strict": true,
+    "baseUrl": "./",
+    "allowSyntheticDefaultImports": true,
+    "noEmit": true,
+    "types": ["react", "react-dom"]
+  }
+}
