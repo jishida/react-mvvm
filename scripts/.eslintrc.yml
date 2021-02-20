@@ -1,0 +1,12 @@
+overrides:
+  - files:
+      - '**.ts'
+    parserOptions:
+      ecmaVersion: 7
+      sourceType: module
+      project: scripts/tsconfig.json
+    rules:
+      no-console:
+        - off
+      'import/no-extraneous-dependencies':
+        - off

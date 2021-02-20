@@ -1,0 +1,10 @@
+rules:
+  '@typescript-eslint/lines-between-class-members':
+    - off
+  '@typescript-eslint/no-unused-vars':
+    - error
+    - argsIgnorePattern: '^_'
+  max-classes-per-file:
+    - off
+  'react/prefer-stateless-function':
+    - off
