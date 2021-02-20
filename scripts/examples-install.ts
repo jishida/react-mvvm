@@ -9,9 +9,10 @@ async function install(path: string) {
 }
 
 async function main() {
-  for (const example of examples) {
-    await install(example);
-  }
+  await examples.reduce(
+    (promise, example) => promise.then(() => install(example)),
+    Promise.resolve()
+  );
 }
 
 main();

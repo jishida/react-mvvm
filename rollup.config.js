@@ -18,17 +18,16 @@ lite.unpkg = 'dist/react-mvvm-lite.min.js';
 lite.main = `lite/${lite.main}`;
 lite.module = `lite/${lite.module}`;
 
-function createBanner(name, pkg, min) {
-  if (min) {
-    return `/**
- * ${name}
+function createBanner(libName, pkg, min) {
+  return min
+    ? `/**
+ * ${libName}
  * @version ${pkg.version}
  * @copyright ${pkg.author} ${pkg.year}
  * @license ${pkg.license}
- **/`;
-  } else {
-    return `/*
-  ${name} ${pkg.version}
+ **/`
+    : `/*
+  ${libName} ${pkg.version}
 
   Copyright (c) ${pkg.year} ${pkg.author}
 
@@ -44,7 +43,6 @@ function createBanner(name, pkg, min) {
     See the License for the specific language governing permissions and
   limitations under the License.
 */`;
-  }
 }
 
 function createOutputs(pkg) {
@@ -88,10 +86,14 @@ function createOutputs(pkg) {
       file: pkg.module,
       format: 'es',
     },
-  ];
-  moduleOutput.forEach((o) => {
-    o.plugins = o.plugins || [];
-    o.plugins.push(
+  ].map((o) => {
+    const output = {
+      plugins: [],
+      sourcemap: true,
+      banner: createBanner(pkg.name, pkg, true),
+      ...o,
+    };
+    output.plugins.push(
       terser({
         mangle: {
           properties: {
@@ -100,10 +102,7 @@ function createOutputs(pkg) {
         },
       })
     );
-    Object.assign(o, {
-      sourcemap: true,
-      banner: createBanner(pkg.name, pkg, true),
-    });
+    return output;
   });
   return [browserOutput, moduleOutput];
 }

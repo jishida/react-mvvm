@@ -1,5 +1,5 @@
 import { resolve } from 'path';
-import { statSync, readFileSync, writeFileSync, createWriteStream } from 'fs';
+import { statSync, readFileSync, writeFileSync } from 'fs';
 import { fileSync as gzipSize } from 'gzip-size';
 import { mkdir } from './utils';
 
@@ -47,13 +47,11 @@ readme.split('\n').forEach((line) => {
     if (/^\s*<!---\s*end\s*file\s*size\s*scope\s*--->/.test(line)) {
       ignore = false;
     }
+  } else if (/^\s*<!---\s*begin\s*file\s*size\s*scope\s*--->/.test(line)) {
+    ignore = true;
+    lines.push(fileSizeScope);
   } else {
-    if (/^\s*<!---\s*begin\s*file\s*size\s*scope\s*--->/.test(line)) {
-      ignore = true;
-      lines.push(fileSizeScope);
-    } else {
-      lines.push(line);
-    }
+    lines.push(line);
   }
 });
 

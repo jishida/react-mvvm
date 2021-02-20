@@ -49,6 +49,6 @@ function updateStopwatch(
   });
 }
 
-for (const [baseExample, subExamples] of stopwatchExamples) {
+stopwatchExamples.forEach(([baseExample, subExamples]) => {
   updateStopwatch(baseExample, subExamples);
-}
+});

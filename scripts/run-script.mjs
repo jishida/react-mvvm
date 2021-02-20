@@ -2,7 +2,7 @@ import { spawn } from 'child_process';
 
 const npx = process.platform === 'win32' ? 'npx.cmd' : 'npx';
 
-async function run(name) {
+function run(name) {
   return new Promise((resolve) => {
     const node = spawn(npx, [
       'ts-node',
