@@ -4,8 +4,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "build": "node build.js",
-    "preinstall": "cd ../../../../.. && npm run examples:preinstall"
+    "build": "node build.js"
   },
   "author": "Junki Ishida",
   "license": "Apache-2.0",
@@ -13,7 +12,7 @@
     "esbuild": "^0.8.32"
   },
   "dependencies": {
-    "@jishida/react-mvvm": "file:../../../../../jishida-react-mvvm-0.1.0.tgz",
+    "@jishida/react-mvvm": "^0.1.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1"
   }

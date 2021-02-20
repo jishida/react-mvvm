@@ -48,7 +48,12 @@ export const stopwatchExamples: ReadonlyArray<
 ];
 
 export const examples: ReadonlyArray<string> = [
+  'js/minimal-app',
+  'js/viewmodel-app',
   'js/stopwatch',
+  'js/material-ui-form',
+  'ts/minimal-app',
+  'ts/viewmodel-app',
   'ts/material-ui-form',
 ].concat(
   stopwatchExamples.flatMap(([baseExample, subExamples]) => [

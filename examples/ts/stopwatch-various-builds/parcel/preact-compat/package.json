@@ -4,8 +4,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "build": "parcel build --public-url . src/index.html",
-    "preinstall": "cd ../../../../.. && npm run examples:preinstall"
+    "build": "parcel build --public-url . src/index.html"
   },
   "author": "Junki Ishida",
   "license": "Apache-2.0",
@@ -14,7 +13,7 @@
     "preact": "^10.5.11"
   },
   "dependencies": {
-    "@jishida/react-mvvm": "file:../../../../../jishida-react-mvvm-0.1.0.tgz",
+    "@jishida/react-mvvm": "^0.1.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1"
   },
