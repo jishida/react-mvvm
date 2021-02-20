@@ -14,8 +14,8 @@ jobs:
           node-version: 14
           registry-url: 'https://registry.npmjs.org'
       - run: npm install
-      - run: npm install -D can-npm-publish
-      - run: npx can-npm-publish
+      - run: npm install -g can-npm-publish
+      - run: can-npm-publish --verbose
       - run: 'npm run test:all'
       - run: npm publish --access public
         env:
