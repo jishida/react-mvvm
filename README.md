@@ -8,7 +8,7 @@
 ## Features
 
 - __Wrapper functions and interfaces for React Hooks API to enable MVVM-like class design.__
-- __<Bind /> component to simplify re-rendering optimization.__
+- __\<Bind /> component to simplify re-rendering optimization.__
 - __API design to be as concise as possible with high affinity to typescript type checking and IntelliSense.__
 
 ## Installation
