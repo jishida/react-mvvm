@@ -18,11 +18,9 @@
     "coverage:all": "npm run build && cross-env TEST_TYPES=all jest --coverage --verbose",
     "script": "node scripts/run-script.mjs",
     "clean": "npm run script clean",
-    "examples:preinstall": "npm run script examples-preinstall",
     "examples:dist:prebuild": "npm run script examples-dist-prebuild",
     "examples:dist:build": "cd examples/dist && npm install && npm run build",
     "examples:install": "npm run script examples-install",
-    "examples:update": "npm run script examples-update",
     "examples:update-stopwatch": "npm run script examples-update-stopwatch"
   },
   "repository": {
