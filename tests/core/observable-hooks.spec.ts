@@ -1,7 +1,6 @@
 import React, { EffectCallback } from 'react';
 import {
   Computed,
-  Hooks,
   observable,
   ObservableOptions,
   setHooks,
@@ -12,12 +11,6 @@ import {
   ObservableObjectFactory,
 } from '../utils/options';
 
-//jest.mock('react');
-//
-//const mockUseMemo = useMemo as jest.MockedFunction<typeof useMemo>;
-//const mockUseState = useState as jest.MockedFunction<typeof useState>;
-//const mockUseEffect = useEffect as jest.MockedFunction<typeof useEffect>;
-//
 const mockHooks = {
   useMemo: jest.fn(React.useMemo),
   useState: jest.fn(React.useState),

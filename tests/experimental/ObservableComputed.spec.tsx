@@ -1,8 +1,8 @@
 import React from 'react';
 import { mount } from 'enzyme';
+import { act } from 'react-dom/test-utils';
 import { observable, Bind } from '@jishida/react-mvvm';
 import { _ObservableComputed } from '../../src/experimental';
-import { act } from 'react-dom/test-utils';
 
 async function wait(timeout?: number): Promise<void> {
   return new Promise((resolve) => {
