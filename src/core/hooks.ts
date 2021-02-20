@@ -1,9 +1,14 @@
 import { Observable } from '../interfaces';
 import { _getHooks } from './modules';
-import { _Observer, _Observable } from './objects';
+import { _Observable } from './objects';
 import { _setToArray } from './utils';
 
 const initialObject = {};
+
+interface Observer {
+  _setState(value: {}): void;
+  _update(): void;
+}
 
 export function _useObservable(observables: ReadonlyArray<Observable<any>>) {
   const { useMemo, useEffect, useState } = _getHooks();
@@ -14,25 +19,29 @@ export function _useObservable(observables: ReadonlyArray<Observable<any>>) {
         processedObjects.add(obj);
       }
     });
+    const observer = {} as Observer;
+    observer._update = () => {
+      observer._setState({});
+    };
     return _setToArray(processedObjects).map(
-      (obj) => [{}, obj] as [_Observer, _Observable<any>]
+      (obj) => [observer, obj] as [Observer, _Observable<any>]
     );
   }, []);
 
   if (observers.length) {
-    const [, update] = useState(initialObject);
+    const [, setState] = useState(initialObject);
 
     observers.forEach(([observer]) => {
-      observer._update = update;
+      observer._setState = setState;
     });
 
     useEffect(() => {
       observers.forEach(([observer, obj]) => {
-        obj._observerSet.add(observer);
+        obj.onNotify.add(observer._update);
       });
       return () => {
         observers.forEach(([observer, obj]) => {
-          obj._observerSet.delete(observer);
+          obj.onNotify.remove(observer._update);
         });
       };
     }, []);

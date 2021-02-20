@@ -9,7 +9,3 @@ export interface _ObservableOptions<V> extends _ViewModelObjectOptions {
 }
 
 export type _ComputedOptions = _ViewModelObjectOptions & ComputedOptions;
-
-export interface _Observer {
-  _update(obj: {}): void;
-}

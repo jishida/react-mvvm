@@ -8,18 +8,18 @@ import {
 import { _applyBias, _is, _argsToArray, _Container } from '../utils';
 import { _getHooks } from '../modules';
 import _Computed from './Computed';
-import { _ObservableOptions, _Observer } from './interfaces';
+import { _ObservableOptions } from './interfaces';
 import _DependencyValue from './DependencyValue';
 import { _getComputedClass } from './computedClasses';
 
 export default class _Observable<V>
   extends _DependencyValue<V>
   implements Observable<V> {
-  readonly _observerSet = new Set<_Observer>();
+  _onNotifyListenerSet = new Set<(sender: this) => void>();
 
-  _onNotifyListenerSet?: Set<(sender: this) => void>;
-
-  _onNotifyListenerContainer?: ListenerContainer<this>;
+  _onNotifyListenerContainer: ListenerContainer<this> = new _Container(
+    this._onNotifyListenerSet
+  );
 
   _value: V;
 
@@ -44,25 +44,13 @@ export default class _Observable<V>
   }
 
   notify() {
-    const newObj = {};
-    this._observerSet.forEach((observer) => {
-      observer._update(newObj);
+    this._onNotifyListenerSet.forEach((listener) => {
+      listener(this);
     });
-    if (this._onNotifyListenerSet) {
-      this._onNotifyListenerSet.forEach((listener) => {
-        listener(this);
-      });
-    }
   }
 
   get onNotify() {
-    if (!this._onNotifyListenerContainer) {
-      this._onNotifyListenerSet = new Set();
-      this._onNotifyListenerContainer = new _Container(
-        this._onNotifyListenerSet
-      );
-    }
-    return this._onNotifyListenerContainer!;
+    return this._onNotifyListenerContainer;
   }
 
   bindValue<T extends any[]>(
@@ -89,8 +77,7 @@ export default class _Observable<V>
 
   to<T>(representFn: (value: V) => T, deps?: ReadonlyArray<any>) {
     const instance: DependencyValue<T> = _getHooks().useMemo(
-      () =>
-        new _Computed(undefined, representFn, [this as DependencyValue<V>]),
+      () => new _Computed(undefined, representFn, [this as DependencyValue<V>]),
       deps || []
     );
     return instance;
