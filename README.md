@@ -138,8 +138,8 @@ The lite version is a basic build, without proxy, validatable, parsable, and res
 
 full:
 
-![](https://img.shields.io/badge/minified%20size-15.1%20kB-blue.svg)
-![](https://img.shields.io/badge/gzipped%20size-4.0%20kB-blue.svg)
+![](https://img.shields.io/badge/minified%20size-15.2%20kB-blue.svg)
+![](https://img.shields.io/badge/gzipped%20size-4.1%20kB-blue.svg)
 
 lite:
 

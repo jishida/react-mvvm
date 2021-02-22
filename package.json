@@ -1,6 +1,6 @@
 {
   "name": "@jishida/react-mvvm",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "year": "2021",
   "description": "Functions and components to help MVVM-like development for React.",
   "source": "src/index.ts",
