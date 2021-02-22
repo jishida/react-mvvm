@@ -5,7 +5,13 @@ import {
   ListenerContainer,
   Observable,
 } from '../../interfaces';
-import { _applyBias, _is, _argsToArray, _Container } from '../utils';
+import {
+  _applyBias,
+  _is,
+  _argsToArray,
+  _Container,
+  _emptyArray,
+} from '../utils';
 import { _getHooks } from '../modules';
 import _Computed from './Computed';
 import { _ObservableOptions } from './interfaces';
@@ -64,7 +70,7 @@ export default class _Observable<V>
       const args = _argsToArray(arguments) as T;
       // eslint-disable-next-line prefer-spread
       self.value = selector.apply(null, args);
-    }, deps || []);
+    }, deps || _emptyArray);
   }
 
   compute<T>(computeFn: (value: V) => T, options?: ComputedOptions) {
@@ -78,7 +84,7 @@ export default class _Observable<V>
   to<T>(representFn: (value: V) => T, deps?: ReadonlyArray<any>) {
     const instance: DependencyValue<T> = _getHooks().useMemo(
       () => new _Computed(undefined, representFn, [this as DependencyValue<V>]),
-      deps || []
+      deps || _emptyArray
     );
     return instance;
   }

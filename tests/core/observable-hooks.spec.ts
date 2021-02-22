@@ -66,8 +66,8 @@ test.each(getObservableOptionsCases())(
       expect(mockHooks.useState).toBeCalledTimes(expected.useStateCalledTimes);
       expect(effectMocks.length).toBe(expected.useEffectCalledTimes);
       expect(mockHooks.useState.mock.calls.length).toBe(setters.length);
-      setters.forEach((setter, i) => {
-        expect((setter as any).mock.calls).toEqual(expected.setterCalls[i]);
+      setters.forEach((setter: any, i) => {
+        expect(setter.mock.calls).toEqual(expected.setterCalls[i]);
       });
     }
 

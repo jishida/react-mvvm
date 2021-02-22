@@ -62,3 +62,5 @@ export function _setToArray<T>(set: Set<T>) {
   });
   return arr;
 }
+
+export const _emptyArray = [];

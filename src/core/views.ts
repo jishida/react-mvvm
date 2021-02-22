@@ -3,47 +3,56 @@ import { DependencyValue, Observable } from '../interfaces';
 import { BindComponent, BindProps } from '../views';
 import { _useObservable } from './hooks';
 import { _getHooks } from './modules';
-import { _assign, _setToArray } from './utils';
+import { _assign, _emptyArray, _setToArray } from './utils';
 import { _DependencyValue } from './objects';
+
+function getBindData(this: BindProps<any, any>) {
+  let childrenIsArray = false;
+  const observableSet: Set<Observable<any>> = new Set();
+  const entries: [string, number, DependencyValue<unknown>][] = [];
+  function addProp(prop: any, name: string, index?: number) {
+    if (prop instanceof _DependencyValue) {
+      prop.deps.forEach((dep) => {
+        observableSet.add(dep);
+      });
+      entries.push([
+        name,
+        index === undefined ? -1 : index,
+        prop as DependencyValue<unknown>,
+      ]);
+    }
+  }
+  Object.keys(this).forEach((name) => {
+    const prop = this[name];
+    switch (name) {
+      case '$type':
+        break;
+      case 'children':
+        if (Array.isArray(prop)) {
+          childrenIsArray = true;
+          prop.forEach((p, i) => {
+            addProp(p, name, i);
+          });
+          break;
+        }
+      // fallthrough
+      default:
+        addProp(prop, name);
+    }
+  });
+  return [_setToArray(observableSet), entries, childrenIsArray] as [
+    Observable<any>[],
+    [string, number, DependencyValue<unknown>][],
+    boolean
+  ];
+}
 
 function createBindElement(props: BindProps<any, any>, ref?: any) {
   const { useMemo } = _getHooks();
-  const [observables, entries, childrenIsArray] = useMemo(() => {
-    let childrenIsArr = false;
-    const observableSet: Set<Observable<any>> = new Set();
-    const entryArr: [string, number, DependencyValue<unknown>][] = [];
-    function addProp(prop: any, name: string, index?: number) {
-      if (prop instanceof _DependencyValue) {
-        prop.deps.forEach((dep) => {
-          observableSet.add(dep);
-        });
-        entryArr.push([
-          name,
-          index === undefined ? -1 : index,
-          prop as DependencyValue<unknown>,
-        ]);
-      }
-    }
-    Object.keys(props).forEach((name) => {
-      const prop = props[name];
-      switch (name) {
-        case '$type':
-          break;
-        case 'children':
-          if (Array.isArray(prop)) {
-            childrenIsArr = true;
-            prop.forEach((p, i) => {
-              addProp(p, name, i);
-            });
-            break;
-          }
-        // fallthrough
-        default:
-          addProp(prop, name);
-      }
-    });
-    return [_setToArray(observableSet), entryArr, childrenIsArr];
-  }, []);
+  const [observables, entries, childrenIsArray] = useMemo(
+    getBindData.bind(props),
+    _emptyArray
+  );
   _useObservable(observables);
   const p = _assign({}, props, (name) => name !== '$type');
   const { $type } = props;

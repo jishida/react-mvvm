@@ -6,7 +6,7 @@ import {
   Observable,
 } from '../../interfaces';
 import { _getHooks } from '../modules';
-import { _applyBias, _setToArray } from '../utils';
+import { _applyBias, _emptyArray, _setToArray } from '../utils';
 import _DependencyValue from './DependencyValue';
 import { _ComputedOptions } from './interfaces';
 
@@ -42,7 +42,7 @@ export default class _Computed<V, D extends DependencyTuple>
   to<T>(representFn: (value: V) => T, deps?: ReadonlyArray<any>) {
     return _getHooks().useMemo(
       () => new _Computed({}, representFn, [this as DependencyValue<V>]),
-      deps || []
+      deps || _emptyArray
     );
   }
 }
