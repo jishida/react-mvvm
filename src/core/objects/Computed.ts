@@ -6,7 +6,7 @@ import {
   Observable,
 } from '../../interfaces';
 import { _getHooks } from '../modules';
-import { _applyBias, _emptyArray, _setToArray } from '../utils';
+import { _applyBias, _emptyArray } from '../utils';
 import _DependencyValue from './DependencyValue';
 import { _ComputedOptions } from './interfaces';
 
@@ -26,11 +26,15 @@ export default class _Computed<V, D extends DependencyTuple>
   ) {
     super(_applyBias(0x02, options));
     this._valueSources = deps.slice();
-    const depSet = new Set<Observable<any>>();
+    const observables: Observable<any>[] = [];
     deps.forEach((dep) => {
-      dep.deps.forEach((d) => depSet.add(d));
+      dep.deps.forEach((d) => {
+        if (!observables.some((o) => o === d)) {
+          observables.push(d);
+        }
+      });
     });
-    this.deps = _setToArray(depSet);
+    this.deps = observables;
     this._compute = computeFn;
   }
 

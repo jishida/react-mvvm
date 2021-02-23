@@ -53,14 +53,4 @@ export function _argsToArray(args: IArguments, start?: number) {
   return Array.prototype.slice.call(args, start);
 }
 
-export function _setToArray<T>(set: Set<T>) {
-  const arr = new Array<T>(set.size);
-  let i = 0;
-  set.forEach((item) => {
-    // eslint-disable-next-line no-plusplus
-    arr[i++] = item;
-  });
-  return arr;
-}
-
 export const _emptyArray = [];

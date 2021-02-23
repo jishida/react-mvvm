@@ -24,7 +24,6 @@ import {
   _Ref,
   _argsToArray,
   _getComputedClass,
-  _setToArray,
   _Observable,
 } from './core';
 // begin extensions scope
@@ -81,16 +80,14 @@ export function useBind() {
   // eslint-disable-next-line prefer-rest-params
   const values: DependencyValue<any>[] = _argsToArray(arguments);
   _useBind(
-    _setToArray(
-      values.reduce((observableSet, value) => {
-        value.deps.forEach((dep) => {
-          if (dep instanceof _Observable) {
-            observableSet.add(dep);
-          }
-        });
-        return observableSet;
-      }, new Set<_Observable<any>>())
-    )
+    values.reduce<_Observable<any>[]>((observables, value) => {
+      value.deps.forEach((dep) => {
+        if (dep instanceof _Observable && !observables.some((o) => o === dep)) {
+          observables.push(dep);
+        }
+      });
+      return observables;
+    }, [])
   );
 }
 

@@ -3,12 +3,12 @@ import { DependencyValue } from '../interfaces';
 import { BindComponent, BindProps } from '../views';
 import { _useBind } from './hooks';
 import { _getHooks } from './modules';
-import { _assign, _emptyArray, _setToArray } from './utils';
+import { _assign, _emptyArray } from './utils';
 import { _DependencyValue, _Observable } from './objects';
 
 function getBindData(this: BindProps<any, any>) {
   let childrenIsArray = false;
-  const observableSet: Set<_Observable<any>> = new Set();
+  const observables: _Observable<any>[] = [];
   const entries: [string, number, DependencyValue<unknown>][] = [];
   function addProp(prop: any, name: string, index?: number) {
     if (prop instanceof _DependencyValue) {
@@ -16,7 +16,9 @@ function getBindData(this: BindProps<any, any>) {
         if (!(dep instanceof _Observable)) {
           throw new Error('Illegal Observable instance');
         }
-        observableSet.add(dep);
+        if (!observables.some((o) => o === dep)) {
+          observables.push(dep);
+        }
       });
       entries.push([
         name,
@@ -43,7 +45,7 @@ function getBindData(this: BindProps<any, any>) {
         addProp(prop, name);
     }
   });
-  return [_setToArray(observableSet), entries, childrenIsArray] as [
+  return [observables, entries, childrenIsArray] as [
     _Observable<any>[],
     [string, number, DependencyValue<unknown>][],
     boolean
