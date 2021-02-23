@@ -167,13 +167,13 @@ import ReactMVVM from '@jishida/react-mvvm/lite';
 full:
 
 ```html
-<script crossorigin src="https://unpkg.com/@jishida/react-mvvm@0.1/dist/react-mvvm.min.js"></script>
+<script crossorigin src="https://unpkg.com/@jishida/react-mvvm@0.2/dist/react-mvvm.min.js"></script>
 ```
 
 lite:
 
 ```html
-<script crossorigin src="https://unpkg.com/@jishida/react-mvvm@0.1/dist/react-mvvm-lite.min.js"></script>
+<script crossorigin src="https://unpkg.com/@jishida/react-mvvm@0.2/dist/react-mvvm-lite.min.js"></script>
 ```
 
 ## License
