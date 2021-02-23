@@ -91,39 +91,37 @@ class FormViewModel {
 
 const store = new FormViewModel();
 
-function PersonView({
-  person: { key, firstName, lastName },
-}: {
-  person: PersonViewModel;
-}) {
-  return (
-    <fieldset>
-      <Typography component='legend'>{`Person ${key}`}</Typography>
-      <div className='form-item'>
-        <Bind
-          $type={TextField}
-          label='First Name'
-          inputRef={firstName.ref}
-          value={firstName}
-          onChange={firstName.bindValue((e) => e.target.value)}
-          error={firstName.hasError}
-          helperText={firstName.errorMessage}
-        />
-      </div>
-      <div className='form-item'>
-        <Bind
-          $type={TextField}
-          label='Last Name'
-          inputRef={lastName.ref}
-          value={lastName}
-          onChange={lastName.bindValue((e) => e.target.value)}
-          error={lastName.hasError}
-          helperText={lastName.errorMessage}
-        />
-      </div>
-    </fieldset>
-  );
-}
+const PersonView = React.memo(
+  ({ person: { key, firstName, lastName } }: { person: PersonViewModel }) => {
+    return (
+      <fieldset>
+        <Typography component='legend'>{`Person ${key}`}</Typography>
+        <div className='form-item'>
+          <Bind
+            $type={TextField}
+            label='First Name'
+            inputRef={firstName.ref}
+            value={firstName}
+            onChange={firstName.bindValue((e) => e.target.value)}
+            error={firstName.hasError}
+            helperText={firstName.errorMessage}
+          />
+        </div>
+        <div className='form-item'>
+          <Bind
+            $type={TextField}
+            label='Last Name'
+            inputRef={lastName.ref}
+            value={lastName}
+            onChange={lastName.bindValue((e) => e.target.value)}
+            error={lastName.hasError}
+            helperText={lastName.errorMessage}
+          />
+        </div>
+      </fieldset>
+    );
+  }
+);
 
 function FormView() {
   const { people, display, addPerson, removePerson, submit } = store;

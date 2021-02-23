@@ -93,9 +93,9 @@ class FormViewModel {
 
 const store = new FormViewModel();
 
-function PersonView({
+const PersonView = React.memo(({
   person: { key, firstName, lastName },
-}) {
+}) => {
   return (
     <fieldset>
       <Typography component='legend'>{`Person ${key}`}</Typography>
@@ -123,7 +123,7 @@ function PersonView({
       </div>
     </fieldset>
   );
-}
+});
 
 function FormView() {
   const { people, display, addPerson, removePerson, submit } = store;
