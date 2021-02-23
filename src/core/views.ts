@@ -1,7 +1,7 @@
 import React, { createElement, FunctionComponent, ReactElement } from 'react';
 import { DependencyValue, Observable } from '../interfaces';
 import { BindComponent, BindProps } from '../views';
-import { _useObservable } from './hooks';
+import { _useBind } from './hooks';
 import { _getHooks } from './modules';
 import { _assign, _emptyArray, _setToArray } from './utils';
 import { _DependencyValue } from './objects';
@@ -53,7 +53,7 @@ function createBindElement(props: BindProps<any, any>, ref?: any) {
     getBindData.bind(props),
     _emptyArray
   );
-  _useObservable(observables);
+  _useBind(observables);
   const p = _assign({}, props, (name) => name !== '$type');
   const { $type } = props;
   p.ref = ref;

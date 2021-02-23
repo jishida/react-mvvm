@@ -10,7 +10,7 @@ interface Observer {
 
 const initialState = {};
 
-function getUseObservableData(this: ReadonlyArray<Observable<any>>) {
+function getUseBindData(this: ReadonlyArray<Observable<any>>) {
   const observableSet = new Set<_Observable<any>>();
   this.forEach((obj) => {
     if (obj instanceof _Observable) {
@@ -39,11 +39,11 @@ function getUseObservableData(this: ReadonlyArray<Observable<any>>) {
   ] as [() => () => void, [Observer, _Observable<any>][]];
 }
 
-export function _useObservable(observables: ReadonlyArray<Observable<any>>) {
+export function _useBind(observables: ReadonlyArray<Observable<any>>) {
   const { useMemo, useEffect, useState } = _getHooks();
 
   const [effect, observers] = useMemo(
-    getUseObservableData.bind(observables),
+    getUseBindData.bind(observables),
     _emptyArray
   );
 

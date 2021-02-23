@@ -4,7 +4,7 @@ import {
   observable,
   ObservableOptions,
   setHooks,
-  useObservable,
+  useBind,
 } from '@jishida/react-mvvm';
 import {
   getObservableOptionsCases,
@@ -40,7 +40,7 @@ class UseEffectMock {
 }
 
 test.each(getObservableOptionsCases())(
-  `useObservable function (%s)`,
+  `useBind function (%s)`,
   (
     _: string,
     options: ObservableOptions,
@@ -83,7 +83,7 @@ test.each(getObservableOptionsCases())(
 
     testCurrent();
 
-    useObservable(sut);
+    useBind(sut);
 
     expected.useMemoCalledTimes += 1;
     expected.useEffectCalledTimes += 1;
@@ -99,7 +99,7 @@ test.each(getObservableOptionsCases())(
     expected.setterCalls[0].push([{}]);
     testCurrent();
 
-    useObservable(sut);
+    useBind(sut);
 
     expected.useMemoCalledTimes += 1;
     expected.useEffectCalledTimes += 1;
@@ -124,13 +124,13 @@ test.each(getObservableOptionsCases())(
   }
 );
 
-test(`useObservable function - invalid prototype`, () => {
+test(`useBind function - invalid prototype`, () => {
   const obj = observable('');
   Object.setPrototypeOf(obj, {});
   mockHooks.useMemo.mockImplementationOnce((fn) => fn());
   mockHooks.useEffect.mockImplementation((fn) => fn());
 
-  useObservable(obj);
+  useBind(obj);
 
   expect(mockHooks.useMemo).toBeCalledTimes(1);
   expect(mockHooks.useEffect).not.toBeCalled();

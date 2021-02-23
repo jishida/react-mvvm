@@ -17,7 +17,7 @@ import {
   _assign, // extensions line
   _getObservableClass,
   _setHooks,
-  _useObservable,
+  _useBind,
   _createBindComponent,
   _ViewModelObject,
   _Ref,
@@ -101,12 +101,10 @@ export function computed<V, D extends DependencyTuple>(
   return new ComputedClass(options, computeFn, deps);
 }
 
-export function useObservable(
-  ...observables: ReadonlyArray<Observable<any>>
-): void;
-export function useObservable() {
+export function useBind(...observables: ReadonlyArray<Observable<any>>): void;
+export function useBind() {
   // eslint-disable-next-line prefer-rest-params
-  _useObservable(_argsToArray(arguments));
+  _useBind(_argsToArray(arguments));
 }
 
 export function ref<E = HTMLElement>() {
