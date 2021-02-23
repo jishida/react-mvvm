@@ -1,7 +1,6 @@
-import { Observable } from '../interfaces';
 import { _getHooks } from './modules';
 import { _Observable } from './objects';
-import { _emptyArray, _setToArray } from './utils';
+import { _emptyArray } from './utils';
 
 interface Observer {
   _setState(value: {}): void;
@@ -10,49 +9,36 @@ interface Observer {
 
 const initialState = {};
 
-function getUseBindData(this: ReadonlyArray<Observable<any>>) {
-  const observableSet = new Set<_Observable<any>>();
-  this.forEach((obj) => {
-    if (obj instanceof _Observable) {
-      observableSet.add(obj);
-    }
-  });
-  const observerBase = {} as Observer;
-  observerBase._update = () => {
-    observerBase._setState({});
+function getUseBindData(this: ReadonlyArray<_Observable<any>>) {
+  const observer = {} as Observer;
+  observer._update = () => {
+    observer._setState({});
   };
-  const observers = _setToArray(observableSet).map(
-    (obj) => [observerBase, obj] as [Observer, _Observable<any>]
-  );
   return [
+    observer,
     () => {
-      observers.forEach(([observer, obj]) => {
-        obj.onNotify.add(observer._update);
+      this.forEach((observable) => {
+        observable.onNotify.add(observer._update);
       });
       return () => {
-        observers.forEach(([o, obj]) => {
-          obj.onNotify.remove(o._update);
+        this.forEach((observable) => {
+          observable.onNotify.remove(observer._update);
         });
       };
     },
-    observers,
-  ] as [() => () => void, [Observer, _Observable<any>][]];
+  ] as [Observer, () => () => void];
 }
 
-export function _useBind(observables: ReadonlyArray<Observable<any>>) {
-  const { useMemo, useEffect, useState } = _getHooks();
+export function _useBind(observables: ReadonlyArray<_Observable<any>>) {
+  if (observables.length) {
+    const { useMemo, useEffect, useState } = _getHooks();
 
-  const [effect, observers] = useMemo(
-    getUseBindData.bind(observables),
-    _emptyArray
-  );
+    const [observer, effect] = useMemo(
+      getUseBindData.bind(observables),
+      _emptyArray
+    );
 
-  if (observers.length) {
-    const [, setState] = useState(initialState);
-
-    observers.forEach(([observer]) => {
-      observer._setState = setState;
-    });
+    [, observer._setState] = useState(initialState);
 
     useEffect(effect, _emptyArray);
   }

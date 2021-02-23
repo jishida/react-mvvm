@@ -3,6 +3,7 @@ import {
   Computed,
   ComputedOptions,
   DependencyTuple,
+  DependencyValue,
   Mandatory,
   Observable,
   ObservableOptions,
@@ -23,6 +24,8 @@ import {
   _Ref,
   _argsToArray,
   _getComputedClass,
+  _setToArray,
+  _Observable,
 } from './core';
 // begin extensions scope
 import { ResolvedObject } from './proxy';
@@ -101,10 +104,25 @@ export function computed<V, D extends DependencyTuple>(
   return new ComputedClass(options, computeFn, deps);
 }
 
-export function useBind(...observables: ReadonlyArray<Observable<any>>): void;
+export function useBind(
+  ...observables: ReadonlyArray<DependencyValue<any>>
+): void;
+
 export function useBind() {
   // eslint-disable-next-line prefer-rest-params
-  _useBind(_argsToArray(arguments));
+  const values: DependencyValue<any>[] = _argsToArray(arguments);
+  _useBind(
+    _setToArray(
+      values.reduce((observableSet, value) => {
+        value.deps.forEach((dep) => {
+          if (dep instanceof _Observable) {
+            observableSet.add(dep);
+          }
+        });
+        return observableSet;
+      }, new Set<_Observable<any>>())
+    )
+  );
 }
 
 export function ref<E = HTMLElement>() {

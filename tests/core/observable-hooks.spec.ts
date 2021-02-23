@@ -127,12 +127,11 @@ test.each(getObservableOptionsCases())(
 test(`useBind function - invalid prototype`, () => {
   const obj = observable('');
   Object.setPrototypeOf(obj, {});
-  mockHooks.useMemo.mockImplementationOnce((fn) => fn());
-  mockHooks.useEffect.mockImplementation((fn) => fn());
+  (obj as any).deps = [obj];
 
   useBind(obj);
 
-  expect(mockHooks.useMemo).toBeCalledTimes(1);
+  expect(mockHooks.useMemo).not.toBeCalled();
   expect(mockHooks.useEffect).not.toBeCalled();
   expect(mockHooks.useState).not.toBeCalled();
 });
