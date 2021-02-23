@@ -130,7 +130,7 @@ In this example, by combining material-ui and these features, a form application
 ## Two different builds
 
 There are two types of builds: full and lite.
-The lite version is a basic build, without proxy, validatable, parsable, and resolveObject functions.
+The lite version of the build does not include proxy, validatable, parsable, and resolveObject functions.
 
 ### File Size
 
@@ -143,8 +143,8 @@ full:
 
 lite:
 
-![](https://img.shields.io/badge/minified%20size-5.2%20kB-blue.svg)
-![](https://img.shields.io/badge/gzipped%20size-1.8%20kB-blue.svg)
+![](https://img.shields.io/badge/minified%20size-5.3%20kB-blue.svg)
+![](https://img.shields.io/badge/gzipped%20size-1.9%20kB-blue.svg)
 
 <!--- end file size scope --->
 
