@@ -71,6 +71,32 @@ export function isViewModelObject(value: any): value is ViewModelObject {
   return value instanceof _ViewModelObject;
 }
 
+// useBind overload
+export function useBind(
+  ...observables: ReadonlyArray<DependencyValue<any>>
+): void;
+
+// useBind implementation
+export function useBind() {
+  // eslint-disable-next-line prefer-rest-params
+  const values: DependencyValue<any>[] = _argsToArray(arguments);
+  _useBind(
+    _setToArray(
+      values.reduce((observableSet, value) => {
+        value.deps.forEach((dep) => {
+          if (dep instanceof _Observable) {
+            observableSet.add(dep);
+          }
+        });
+        return observableSet;
+      }, new Set<_Observable<any>>())
+    )
+  );
+}
+
+export function ref<E = HTMLElement>() {
+  return new _Ref() as Ref<E>;
+}
 // computed overloads
 export function computed<V, D extends DependencyTuple>(
   computeFn: (...args: ComputedArgs<D>) => V,
@@ -102,31 +128,6 @@ export function computed<V, D extends DependencyTuple>(
 ) {
   const ComputedClass = _getComputedClass<V, D>(options);
   return new ComputedClass(options, computeFn, deps);
-}
-
-export function useBind(
-  ...observables: ReadonlyArray<DependencyValue<any>>
-): void;
-
-export function useBind() {
-  // eslint-disable-next-line prefer-rest-params
-  const values: DependencyValue<any>[] = _argsToArray(arguments);
-  _useBind(
-    _setToArray(
-      values.reduce((observableSet, value) => {
-        value.deps.forEach((dep) => {
-          if (dep instanceof _Observable) {
-            observableSet.add(dep);
-          }
-        });
-        return observableSet;
-      }, new Set<_Observable<any>>())
-    )
-  );
-}
-
-export function ref<E = HTMLElement>() {
-  return new _Ref() as Ref<E>;
 }
 
 // observable overloads
