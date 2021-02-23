@@ -75,6 +75,10 @@ function createBindElement(props: BindProps<any, any>, ref?: any) {
   return createElement($type, p);
 }
 
+const { memo } = React as {
+  memo?: (base: BindComponent) => BindComponent;
+};
+
 const { forwardRef } = React as {
   forwardRef?: (
     render: (props: any, ref: any) => ReactElement | null
@@ -82,7 +86,8 @@ const { forwardRef } = React as {
 };
 
 export function _createBindComponent() {
-  return (typeof forwardRef === 'function'
+  const component = (typeof forwardRef === 'function'
     ? forwardRef((props: any, ref: any) => createBindElement(props, ref))
     : (props: any) => createBindElement(props)) as BindComponent;
+  return typeof memo === 'function' ? memo(component) : component;
 }
