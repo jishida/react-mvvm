@@ -1,5 +1,4 @@
 import {
-  Computed,
   ComputedOptions,
   DependencyValue,
   ListenerContainer,
@@ -45,7 +44,7 @@ export default class _Observable<V>
     }
   }
 
-  get deps() {
+  get deps(): ReadonlyArray<Observable<any>> {
     return [this];
   }
 
@@ -75,17 +74,16 @@ export default class _Observable<V>
 
   compute<T>(computeFn: (value: V) => T, options?: ComputedOptions) {
     const ComputedClass = _getComputedClass<T, [DependencyValue<V>]>(options);
-    const instance: Computed<T> = new ComputedClass(options, computeFn, [
-      this as DependencyValue<V>,
-    ]);
-    return instance as any;
+    return new ComputedClass(options, computeFn, [this]) as any;
   }
 
-  to<T>(representFn: (value: V) => T, deps?: ReadonlyArray<any>) {
-    const instance: DependencyValue<T> = _getHooks().useMemo(
+  to<T>(
+    representFn: (value: V) => T,
+    deps?: ReadonlyArray<any>
+  ): DependencyValue<T> {
+    return _getHooks().useMemo<DependencyValue<T>>(
       () => new _Computed(undefined, representFn, [this as DependencyValue<V>]),
       deps || _emptyArray
     );
-    return instance;
   }
 }
