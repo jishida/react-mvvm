@@ -9,7 +9,8 @@ extends:
   - plugin:import/recommended
   - airbnb
   - prettier
-  - prettier/react
-rules:
-  'import/no-extraneous-dependencies':
-    - off
+overrides:
+  - files: src/**.{js,jsx}
+    rules:
+      'import/no-extraneous-dependencies':
+        - off

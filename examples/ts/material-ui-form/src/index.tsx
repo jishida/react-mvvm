@@ -77,14 +77,15 @@ class FormViewModel {
       this.state.display = JSON.stringify(results, undefined, 2);
     } else {
       this.state.display = 'Error';
-      for (const person of this.state.people) {
-        for (const [key, err] of Object.entries(person.errors)) {
+      this.state.people.some((person) =>
+        Object.entries(person.errors).some(([key, err]) => {
           if (err) {
             (person.refs as any)[key].focus();
-            return;
+            return true;
           }
-        }
-      }
+          return false;
+        })
+      );
     }
   };
 }
@@ -92,35 +93,33 @@ class FormViewModel {
 const store = new FormViewModel();
 
 const PersonView = React.memo(
-  ({ person: { key, firstName, lastName } }: { person: PersonViewModel }) => {
-    return (
-      <fieldset>
-        <Typography component='legend'>{`Person ${key}`}</Typography>
-        <div className='form-item'>
-          <Bind
-            $type={TextField}
-            label='First Name'
-            inputRef={firstName.ref}
-            value={firstName}
-            onChange={firstName.bindValue((e) => e.target.value)}
-            error={firstName.hasError}
-            helperText={firstName.errorMessage}
-          />
-        </div>
-        <div className='form-item'>
-          <Bind
-            $type={TextField}
-            label='Last Name'
-            inputRef={lastName.ref}
-            value={lastName}
-            onChange={lastName.bindValue((e) => e.target.value)}
-            error={lastName.hasError}
-            helperText={lastName.errorMessage}
-          />
-        </div>
-      </fieldset>
-    );
-  }
+  ({ person: { key, firstName, lastName } }: { person: PersonViewModel }) => (
+    <fieldset>
+      <Typography component='legend'>{`Person ${key}`}</Typography>
+      <div className='form-item'>
+        <Bind
+          $type={TextField}
+          label='First Name'
+          inputRef={firstName.ref}
+          value={firstName}
+          onChange={firstName.bindValue((e) => e.target.value)}
+          error={firstName.hasError}
+          helperText={firstName.errorMessage}
+        />
+      </div>
+      <div className='form-item'>
+        <Bind
+          $type={TextField}
+          label='Last Name'
+          inputRef={lastName.ref}
+          value={lastName}
+          onChange={lastName.bindValue((e) => e.target.value)}
+          error={lastName.hasError}
+          helperText={lastName.errorMessage}
+        />
+      </div>
+    </fieldset>
+  )
 );
 
 function FormView() {
