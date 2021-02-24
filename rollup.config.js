@@ -110,14 +110,12 @@ function createOutputs(pkg) {
 export default [main, lite].reduce(
   (list, pkg) =>
     list.concat(
-      createOutputs(pkg).map((output) => {
-        return {
-          input: pkg.source,
-          output,
-          plugins: [typescript(), buble({ ie: 11 }), bundleSize()],
-          external: ['react'],
-        };
-      })
+      createOutputs(pkg).map((output) => ({
+        input: pkg.source,
+        output,
+        plugins: [typescript(), buble({ ie: 11 }), bundleSize()],
+        external: ['react'],
+      }))
     ),
   []
 );

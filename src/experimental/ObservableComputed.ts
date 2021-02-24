@@ -56,9 +56,10 @@ export default class _ObservableComputed<V, T extends ObservableTuple>
 
   to<R>(representFn: (value: V) => R, deps?: ReadonlyArray<any>) {
     const { useMemo, useEffect } = _getHooks();
-    const instance = useMemo(() => {
-      return new _ObservableComputed({}, representFn, [this._observable]);
-    }, deps || []);
+    const instance = useMemo(
+      () => new _ObservableComputed({}, representFn, [this._observable]),
+      deps || []
+    );
     useEffect(
       () => () => {
         instance.dispose();

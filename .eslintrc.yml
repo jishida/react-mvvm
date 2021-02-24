@@ -10,8 +10,6 @@ parserOptions:
 plugins:
   - eslint-plugin-react-hooks
 ignorePatterns:
-  - '**.ejs'
-  - '**.yml'
   - '/build/**'
   - '/coverage/**'
   - '/dist/**'
@@ -31,8 +29,6 @@ overrides:
       - plugin:import/typescript
       - airbnb-typescript
       - prettier
-      - prettier/react
-      - prettier/@typescript-eslint
     parser: '@typescript-eslint/parser'
     parserOptions:
       ecmaVersion: 7

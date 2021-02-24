@@ -91,13 +91,11 @@ export default async function generateProxyFunc() {
   const yamlText = readFileSync(yamlFile, 'utf8');
   const yaml = load(yamlText) as YamlEntry[];
   const entries: TemplateEntry[] = yaml.flatMap(({ include, exclude }) =>
-    exclude.map((_exclude) => {
-      return {
-        filter: getFilter(include, _exclude),
-        includeClass: getIncludeClass(include),
-        excludeClass: getExcludeClass(_exclude),
-      };
-    })
+    exclude.map((_exclude) => ({
+      filter: getFilter(include, _exclude),
+      includeClass: getIncludeClass(include),
+      excludeClass: getExcludeClass(_exclude),
+    }))
   );
   const templateFile = resolve('src/proxy-func.ejs');
   const templateText = readFileSync(templateFile, 'utf8');

@@ -116,17 +116,15 @@ test types: all, standard, internal, react, preact, preact-unique, module, modul
 }
 
 module.exports = {
-  projects: projects.map((project) => {
-    return {
-      preset: 'ts-jest',
-      roots: ['<rootDir>/tests'],
-      globals: {
-        'ts-jest': {
-          tsconfig: 'tests/tsconfig.json',
-        },
+  projects: projects.map((project) => ({
+    preset: 'ts-jest',
+    roots: ['<rootDir>/tests'],
+    globals: {
+      'ts-jest': {
+        tsconfig: 'tests/tsconfig.json',
       },
-      ...project,
-    };
-  }),
+    },
+    ...project,
+  })),
   collectCoverageFrom: ['**/src/**', '!**/tests/**'],
 };
