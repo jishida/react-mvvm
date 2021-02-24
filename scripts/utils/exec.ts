@@ -11,7 +11,7 @@ class ProcessError extends Error {
 
 export default async function exec(cmd: string, ...args: string[]) {
   console.log(`execute: ${cmd} ${args.map((arg) => `'${arg}'`).join(' ')}`);
-  return new Promise((resolve, reject) => {
+  return new Promise<void>((resolve, reject) => {
     const n = spawn(cmd, args, {});
     n.stdout.on('data', (data) => {
       process.stdout.write(data);
@@ -23,7 +23,7 @@ export default async function exec(cmd: string, ...args: string[]) {
       if (code) {
         reject(new ProcessError(code));
       } else {
-        resolve(undefined);
+        resolve();
       }
     });
   });
