@@ -85,9 +85,10 @@ const { forwardRef } = React as {
   ) => FunctionComponent;
 };
 
-export function _createBindComponent() {
+export function _createBindComponent(displayName: string) {
   const component = (typeof forwardRef === 'function'
     ? forwardRef((props: any, ref: any) => createBindElement(props, ref))
     : (props: any) => createBindElement(props)) as BindComponent;
+  component.displayName = displayName;
   return typeof memo === 'function' ? memo(component) : component;
 }

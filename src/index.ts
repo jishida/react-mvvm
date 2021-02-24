@@ -56,11 +56,9 @@ export * from './interfaces';
 export * from './hooks';
 export * from './views';
 
-export const Bind: BindComponent = _createBindComponent();
-Bind.displayName = 'Bind';
+export const Bind: BindComponent = _createBindComponent('Bind');
 
-export const DOMBind: DOMBindComponent = _createBindComponent();
-DOMBind.displayName = 'DOMBind';
+export const DOMBind: DOMBindComponent = _createBindComponent('DOMBind');
 
 export function setHooks(hooks: Hooks) {
   _setHooks(hooks);

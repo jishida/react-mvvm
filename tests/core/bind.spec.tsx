@@ -114,3 +114,19 @@ test(`Bind component - observable array item`, () => {
   expect(wrapper.find('dt').text()).toBe(modifiedTerm);
   expect(wrapper.find('dd').text()).toBe(modifiedDescription);
 });
+
+test(`Bind component - ref forwarded`, () => {
+  const initialValue = 'initial value';
+  const text = observable<string, HTMLInputElement>(initialValue, {
+    ref: true,
+  });
+  const wrapper = mount(
+    <Bind $type='input' ref={text.ref} defaultValue={text} />
+  );
+  expect(wrapper.find('input').getDOMNode<HTMLInputElement>()).toBe(
+    text.ref.current
+  );
+  expect(wrapper.find('input').getDOMNode<HTMLInputElement>().value).toBe(
+    initialValue
+  );
+});
