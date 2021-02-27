@@ -1,12 +1,13 @@
 .vscode/
+.github/
 tests/
 build/
 coverage/
 examples/
 src/
-config/
 scripts/
-types/impl/
+types/core/
+types/extensions/
 .env
 .git*
 .prettier*
