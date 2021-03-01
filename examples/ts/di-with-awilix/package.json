@@ -1,0 +1,41 @@
+{
+  "name": "di-with-awilix",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "make-breeds": "node scripts/make-breeds.mjs",
+    "start": "snowpack dev"
+  },
+  "author": "Junki Ishida",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "@snowpack/plugin-dotenv": "^2.0.5",
+    "@snowpack/plugin-react-refresh": "^2.4.0",
+    "@snowpack/plugin-typescript": "^1.2.1",
+    "@types/react": "^16.14.4",
+    "@types/react-dom": "^16.9.11",
+    "@types/uuid": "^8.3.0",
+    "@typescript-eslint/eslint-plugin": "^4.15.2",
+    "@typescript-eslint/parser": "^4.15.2",
+    "eslint": "^7.20.0",
+    "eslint-config-airbnb-typescript": "^12.3.1",
+    "eslint-config-prettier": "^8.1.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-react": "^7.22.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "prettier": "^2.2.1",
+    "snowpack": "^3.0.13",
+    "typescript": "^4.2.2"
+  },
+  "dependencies": {
+    "@jishida/react-awilix": "^0.1.0",
+    "@jishida/react-mvvm": "^0.2.0",
+    "awilix": "^4.3.3",
+    "axios": "^0.21.1",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0",
+    "uuid": "^8.3.2"
+  }
+}

@@ -6,6 +6,7 @@ module.exports = {
     'viewmodel-app': './src/viewmodel-app/index.tsx',
     'stopwatch': './src/stopwatch/index.tsx',
     'material-ui-form': './src/material-ui-form/index.tsx',
+    'di-with-awilix': './src/di-with-awilix/index.tsx',
   },
   output: {
     path: __dirname,
@@ -26,6 +27,9 @@ module.exports = {
   externals: {
     react: 'React',
     'react-dom': 'ReactDOM',
+    axios: 'axios',
+    awilix: 'Awilix',
     '@jishida/react-mvvm': 'ReactMVVM',
+    '@jishida/react-awilix': 'ReactAwilix'
   },
 };

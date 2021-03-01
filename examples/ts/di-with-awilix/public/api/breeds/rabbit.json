@@ -1,0 +1,52 @@
+[
+  {
+    "name": "Himalayan",
+    "origin": "China",
+    "weight": "2.7-3.6"
+  },
+  {
+    "name": "Dwarf Hotot",
+    "origin": "Germany",
+    "weight": "0.9-1.3"
+  },
+  {
+    "name": "Dwarf Lop",
+    "origin": "Germany",
+    "weight": "1.9-2.3"
+  },
+  {
+    "name": "Netherland Dwarf",
+    "origin": "Netherlands",
+    "weight": "0.5.1.1"
+  },
+  {
+    "name": "Lionhead",
+    "origin": "France and Belgium",
+    "weight": "1.3-1.7"
+  },
+  {
+    "name": "Jersey Wooly",
+    "origin": "United States",
+    "weight": "1.1-1.6"
+  },
+  {
+    "name": "Mini Satin",
+    "origin": "United States",
+    "weight": "1.4-2.1"
+  },
+  {
+    "name": "Mini Rex",
+    "origin": "United States",
+    "weight": "1.4-2.0"
+  },
+  {
+    "name": "Harlequin",
+    "origin": "France",
+    "weight": "2.7-3.6"
+  },
+  {
+    "name": "Chinchilla",
+    "origin": "France",
+    "weight": "2.3-3.4"
+  }
+]

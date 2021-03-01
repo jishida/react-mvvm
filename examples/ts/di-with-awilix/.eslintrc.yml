@@ -1,0 +1,19 @@
+root: true
+env:
+  browser: true
+  es6: true
+overrides:
+  - files: src/**.{ts,tsx}
+    extends:
+      - plugin:import/recommended
+      - plugin:import/typescript
+      - airbnb-typescript
+      - prettier
+    parser: '@typescript-eslint/parser'
+    parserOptions:
+      ecmaVersion: 7
+      sourceType: module
+      project: tsconfig.json
+    plugins:
+      - eslint-plugin-react-hooks
+      - '@typescript-eslint/eslint-plugin'
