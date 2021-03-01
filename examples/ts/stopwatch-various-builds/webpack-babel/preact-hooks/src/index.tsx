@@ -37,7 +37,7 @@ class StopwatchViewModel {
   start = () => {
     if (!this.intervalId) {
       this.startAt = Date.now();
-      this.intervalId = setInterval(this.updateElapsedTime, 50);
+      this.intervalId = window.setInterval(this.updateElapsedTime, 50);
       this.state.enabled = false;
     }
   };
