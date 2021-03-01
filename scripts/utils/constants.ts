@@ -67,4 +67,5 @@ export const buildExampleNames = [
   'viewmodel-app',
   'stopwatch',
   'material-ui-form',
+  'di-with-awilix',
 ];

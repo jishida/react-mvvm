@@ -8,6 +8,6 @@
     "moduleResolution": "node",
     "esModuleInterop": true,
     "resolveJsonModule": true,
-    "types": ["node", "ejs", "js-yaml"]
+    "types": ["node", "ejs", "js-yaml", "fs-extra"]
   }
 }

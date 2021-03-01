@@ -1,9 +1,14 @@
-import { resolve } from 'path';
+import { resolve, relative } from 'path';
 import { statSync, rmdirSync, unlinkSync } from 'fs';
+
+function isProjectContent(path: string) {
+  const rel = relative(resolve(''), path);
+  return !/^((|\.\.|\.git)$|\.git[/\\]|\.\.[/\\])/.test(rel);
+}
 
 export default function remove(path: string) {
   const p = resolve(path);
-  if (p === resolve('')) {
+  if (!isProjectContent(p)) {
     throw new Error(`remove: Invalid argument '${path}'`);
   }
   try {

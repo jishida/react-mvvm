@@ -1,19 +1,11 @@
-import { copyFileSync } from 'fs';
+import { copySync } from 'fs-extra';
 import { resolve } from 'path';
-import listFiles from './listFiles';
 import mkdir from './mkdir';
-
-export interface CopyOptions {
-  search?: string | RegExp;
-  replace?: string;
-}
 
 export default function copy(srcDir: string, destDir: string) {
   mkdir(destDir);
-  listFiles(srcDir).forEach((file) => {
-    const src = resolve(srcDir, file);
-    const dest = resolve(destDir, file);
-    copyFileSync(src, dest);
-    console.log(`copied '${src}' to '${dest}'`);
-  });
+  const src = resolve(srcDir);
+  const dest = resolve(destDir);
+  copySync(src, dest);
+  console.log(`copied '${src}' to '${dest}'`);
 }
