@@ -11,4 +11,4 @@ types/core/
 types/extensions/
 *.tgz
 *.tsbuildinfo
-!examples/dist/
+examples/dist/
