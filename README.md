@@ -176,6 +176,10 @@ lite:
 <script crossorigin src="https://unpkg.com/@jishida/react-mvvm@0.2/dist/react-mvvm-lite.min.js"></script>
 ```
 
+## Browser Support
+
+React MVVM supports IE11, but Promise polyfill is required to use _async_ options.
+
 ## License
 
 React MVVM is licensed under the [Apache 2.0 License](https://github.com/jishida/react-mvvm/blob/master/LICENSE)
