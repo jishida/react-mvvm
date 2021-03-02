@@ -1,0 +1,2 @@
+!function(){"use strict";var e={n:function(n){var t=n&&n.__esModule?function(){return n.default}:function(){return n};return e.d(t,{a:t}),t},d:function(n,t){for(var r in t)e.o(t,r)&&!e.o(n,r)&&Object.defineProperty(n,r,{enumerable:!0,get:t[r]})},o:function(e,n){return Object.prototype.hasOwnProperty.call(e,n)}},n=React,t=e.n(n),r=ReactDOM,o=e.n(r),c=ReactMVVM,u=(0,c.observable)(0);o().render(t().createElement(c.Bind,{$type:"button",onClick:function(){u.value+=1}},"increment: ",u),document.getElementById("root"))}();
+//# sourceMappingURL=index.js.map

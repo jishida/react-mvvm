@@ -1,0 +1,34 @@
+{
+  "private": true,
+  "name": "examples",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.html",
+  "scripts": {
+    "prebuild": "cd ../.. && npm run examples:dist:prebuild",
+    "build": "webpack",
+    "start": "http-server"
+  },
+  "author": "Junki Ishida",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@jishida/react-awilix": "^0.1.0",
+    "@jishida/react-mvvm": "^0.2.0",
+    "@material-ui/core": "^4.11.3",
+    "awilix": "^4.3.3",
+    "axios": "^0.21.1",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "@types/react": "^16.14.4",
+    "@types/react-dom": "^16.9.11",
+    "@types/uuid": "^8.3.0",
+    "http-server": "^0.12.3",
+    "ts-loader": "^8.0.17",
+    "typescript": "^4.1.5",
+    "webpack": "^5.23.0",
+    "webpack-cli": "^4.5.0"
+  }
+}
