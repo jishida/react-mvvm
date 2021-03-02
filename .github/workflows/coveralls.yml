@@ -1,4 +1,10 @@
-on: [push]
+on:
+  push:
+    branches-ignore:
+      - gh-pages
+    paths-ignore:
+      - 'examples/**'
+      - '**.md'
 name: Coveralls
 jobs:
   build:
