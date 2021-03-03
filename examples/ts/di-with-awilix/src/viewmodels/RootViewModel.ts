@@ -1,5 +1,4 @@
-import React from 'react';
-import { observable, ref, proxy, computed } from '@jishida/react-mvvm';
+import { observable, proxy } from '@jishida/react-mvvm';
 import { asValue, AwilixContainer } from 'awilix';
 import { ApiService, BreedData } from '../services';
 import AnimalViewModel from './AnimalViewModel';
@@ -15,19 +14,7 @@ export default class RootViewModel {
 
   animals = observable<AnimalViewModel[]>([]);
 
-  controlState = observable<'unloaded' | 'loading' | 'loaded'>('unloaded');
-
-  selectItems = computed(
-    (animals, state) => {
-      if (animals.length) {
-        return animals.map(({ key, name }) => (
-          <option key={key}>{name}</option>
-        ));
-      }
-      return state === 'loading' ? null : <option>Select an animal</option>;
-    },
-    [this.animals, this.controlState]
-  );
+  controlState = observable<'unloaded' | 'loading' | 'loaded'>('loading');
 
   breeds = observable<BreedViewModel[]>([]);
 
@@ -38,6 +25,9 @@ export default class RootViewModel {
   constructor(cradle: { container: AwilixContainer; api: ApiService }) {
     this.container = cradle.container;
     this.api = cradle.api;
+    this.selectedAnimalName.onNotify.add(() => {
+      this.loadBreeds();
+    });
   }
 
   private createAnimal(name: string) {
@@ -55,19 +45,17 @@ export default class RootViewModel {
   }
 
   loadAnimals = async () => {
-    if (this.state.controlState === 'unloaded') {
-      this.state.controlState = 'loading';
-      try {
-        const animalNames = await this.api.getAnimals();
-        this.state.animals = animalNames.map((name) => this.createAnimal(name));
-        if (!animalNames.length) {
-          throw new Error();
-        }
-        this.state.controlState = 'loaded';
-        this.state.selectedAnimalName = animalNames[0];
-      } catch {
-        this.state.controlState = 'unloaded';
+    this.state.controlState = 'loading';
+    try {
+      const animalNames = await this.api.getAnimals();
+      if (!animalNames.length) {
+        throw new Error();
       }
+      this.state.animals = animalNames.map((name) => this.createAnimal(name));
+      this.state.selectedAnimalName = animalNames[0];
+      this.state.controlState = 'loaded';
+    } catch {
+      this.state.controlState = 'unloaded';
     }
   };
 

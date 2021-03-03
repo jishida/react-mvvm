@@ -1,11 +1,11 @@
 name                 | origin         | weight
-Labrador Retriever   | United Kingdom | 25-36
+Beagle               | United Kingdom | 9.1-11.3
+Bulldog              | United Kingdom | 18-25
+Chihuahua            | Mexico         | 1.8-2.7
+French Bulldog       | France         | 7.3-11.3
 German Shepherd      | Germany        | 22-40
 Golden Retriever     | United Kingdom | 55-75
-Bulldog              | United Kingdom | 18-25
-Beagle               | United Kingdom | 9.1-11.3
-French Bulldog       | France         | 7.3-11.3
+Labrador Retriever   | United Kingdom | 25-36
+Pembroke Welsh Corgi | United Kingdom | 11-14
 Rottweller           | Germany        | 35-60
 Yorkshire Terrier    | United Kingdom | 2.0-3.1
-Pembroke Welsh Corgi | United Kingdom | 11-14
-Chihuahua            | Mexico         | 1.8-2.7
