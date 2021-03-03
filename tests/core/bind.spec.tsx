@@ -1,6 +1,6 @@
 import React from 'react';
 import { act } from 'react-dom/test-utils';
-import { Bind, observable } from '@jishida/react-mvvm';
+import { Bind, computed, observable, useBind } from '@jishida/react-mvvm';
 import { mount } from 'enzyme';
 
 test(`Bind component - bind Observable to HTML tag`, () => {
@@ -140,4 +140,45 @@ test(`Bind component - pass the same Observable object twice to a Bind component
   );
   expect(wrapper.find('p').text()).toBe('class-name');
   expect(wrapper.find('p').getDOMNode().className).toBe('class-name');
+});
+
+test(`useBind function - same deps`, () => {
+  const a = observable('a');
+  const b = observable('b');
+  const ab = computed((a, b) => `${a}+${b}`, [a, b]);
+
+  const Component = () => {
+    useBind(a, b, ab);
+    return (
+      <ul>
+        <li>{a.value}</li>
+        <li>{b.value}</li>
+        <li>{ab.value}</li>
+      </ul>
+    );
+  };
+
+  const wrapper = mount(<Component />);
+  expect(wrapper.find('li').length).toBe(3);
+  expect(wrapper.find('li').at(0).text()).toBe('a');
+  expect(wrapper.find('li').at(1).text()).toBe('b');
+  expect(wrapper.find('li').at(2).text()).toBe('a+b');
+
+  act(() => {
+    a.value = 'alpha';
+  });
+
+  expect(wrapper.find('li').length).toBe(3);
+  expect(wrapper.find('li').at(0).text()).toBe('alpha');
+  expect(wrapper.find('li').at(1).text()).toBe('b');
+  expect(wrapper.find('li').at(2).text()).toBe('alpha+b');
+
+  act(() => {
+    b.value = 'bravo';
+  });
+
+  expect(wrapper.find('li').length).toBe(3);
+  expect(wrapper.find('li').at(0).text()).toBe('alpha');
+  expect(wrapper.find('li').at(1).text()).toBe('bravo');
+  expect(wrapper.find('li').at(2).text()).toBe('alpha+bravo');
 });
