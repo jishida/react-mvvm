@@ -1,13 +1,13 @@
 [
   {
-    "name": "Exotic Shorthair",
-    "origin": "United States",
-    "weight": "3.5-6.0"
+    "name": "Abyssinian",
+    "origin": "Unknown",
+    "weight": "3.0-5.0"
   },
   {
-    "name": "Ragdoll",
+    "name": "American Shothair",
     "origin": "United States",
-    "weight": "3.6-9.1"
+    "weight": "2.7-6.8"
   },
   {
     "name": "British Shothair",
@@ -15,9 +15,14 @@
     "weight": "3.2-7.7"
   },
   {
-    "name": "Persian",
-    "origin": "Iran",
-    "weight": "3.0-5.5"
+    "name": "Devon Rex",
+    "origin": "United Kingdom",
+    "weight": "2.5-5.0"
+  },
+  {
+    "name": "Exotic Shorthair",
+    "origin": "United States",
+    "weight": "3.5-6.0"
   },
   {
     "name": "Maine Coon",
@@ -25,9 +30,14 @@
     "weight": "3.6-8.2"
   },
   {
-    "name": "American Shothair",
+    "name": "Persian",
+    "origin": "Iran",
+    "weight": "3.0-5.5"
+  },
+  {
+    "name": "Ragdoll",
     "origin": "United States",
-    "weight": "2.7-6.8"
+    "weight": "3.6-9.1"
   },
   {
     "name": "Scottish Fold",
@@ -38,15 +48,5 @@
     "name": "Sphynx",
     "origin": "Canada",
     "weight": "3.5-7.0"
-  },
-  {
-    "name": "Abyssinian",
-    "origin": "Unknown",
-    "weight": "3.0-5.0"
-  },
-  {
-    "name": "Devon Rex",
-    "origin": "United Kingdom",
-    "weight": "2.5-5.0"
   }
 ]

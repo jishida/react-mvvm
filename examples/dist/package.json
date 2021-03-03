@@ -7,7 +7,7 @@
   "scripts": {
     "prebuild": "cd ../.. && npm run examples:dist:prebuild",
     "build": "webpack",
-    "start": "http-server"
+    "start": "http-server -c-0"
   },
   "author": "Junki Ishida",
   "license": "Apache-2.0",

@@ -1,8 +1,23 @@
 [
   {
-    "name": "Labrador Retriever",
+    "name": "Beagle",
     "origin": "United Kingdom",
-    "weight": "25-36"
+    "weight": "9.1-11.3"
+  },
+  {
+    "name": "Bulldog",
+    "origin": "United Kingdom",
+    "weight": "18-25"
+  },
+  {
+    "name": "Chihuahua",
+    "origin": "Mexico",
+    "weight": "1.8-2.7"
+  },
+  {
+    "name": "French Bulldog",
+    "origin": "France",
+    "weight": "7.3-11.3"
   },
   {
     "name": "German Shepherd",
@@ -15,19 +30,14 @@
     "weight": "55-75"
   },
   {
-    "name": "Bulldog",
+    "name": "Labrador Retriever",
     "origin": "United Kingdom",
-    "weight": "18-25"
+    "weight": "25-36"
   },
   {
-    "name": "Beagle",
+    "name": "Pembroke Welsh Corgi",
     "origin": "United Kingdom",
-    "weight": "9.1-11.3"
-  },
-  {
-    "name": "French Bulldog",
-    "origin": "France",
-    "weight": "7.3-11.3"
+    "weight": "11-14"
   },
   {
     "name": "Rottweller",
@@ -38,15 +48,5 @@
     "name": "Yorkshire Terrier",
     "origin": "United Kingdom",
     "weight": "2.0-3.1"
-  },
-  {
-    "name": "Pembroke Welsh Corgi",
-    "origin": "United Kingdom",
-    "weight": "11-14"
-  },
-  {
-    "name": "Chihuahua",
-    "origin": "Mexico",
-    "weight": "1.8-2.7"
   }
 ]
