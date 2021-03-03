@@ -12,12 +12,10 @@ import {
   Result,
   ViewModelObject,
 } from './interfaces';
-import { Hooks } from './hooks';
 import { BindComponent, DOMBindComponent } from './views';
 import {
   _assign, // extensions line
   _getObservableClass,
-  _setHooks,
   _useBind,
   _createBindComponent,
   _ViewModelObject,
@@ -53,16 +51,11 @@ import {
 // end extensions scope
 
 export * from './interfaces';
-export * from './hooks';
 export * from './views';
 
 export const Bind: BindComponent = _createBindComponent('Bind');
 
 export const DOMBind: DOMBindComponent = _createBindComponent('DOMBind');
-
-export function setHooks(hooks: Hooks) {
-  _setHooks(hooks);
-}
 
 export function isViewModelObject(value: any): value is ViewModelObject {
   return value instanceof _ViewModelObject;

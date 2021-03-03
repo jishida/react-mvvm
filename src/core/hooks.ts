@@ -1,4 +1,4 @@
-import { _getHooks } from './modules';
+import React from 'react';
 import { _Observable } from './objects';
 import { _emptyArray } from './utils';
 
@@ -31,15 +31,13 @@ function getUseBindData(this: ReadonlyArray<_Observable<any>>) {
 
 export function _useBind(observables: ReadonlyArray<_Observable<any>>) {
   if (observables.length) {
-    const { useMemo, useEffect, useState } = _getHooks();
-
-    const [observer, effect] = useMemo(
+    const [observer, effect] = React.useMemo(
       getUseBindData.bind(observables),
       _emptyArray
     );
 
-    [, observer._setState] = useState(initialState);
+    [, observer._setState] = React.useState(initialState);
 
-    useEffect(effect, _emptyArray);
+    React.useEffect(effect, _emptyArray);
   }
 }

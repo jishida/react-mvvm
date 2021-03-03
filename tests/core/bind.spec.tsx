@@ -130,3 +130,14 @@ test(`Bind component - ref forwarded`, () => {
     initialValue
   );
 });
+
+test(`Bind component - pass the same Observable object twice to a Bind component`, () => {
+  const className = observable('class-name');
+  const wrapper = mount(
+    <Bind $type='p' className={className}>
+      {className}
+    </Bind>
+  );
+  expect(wrapper.find('p').text()).toBe('class-name');
+  expect(wrapper.find('p').getDOMNode().className).toBe('class-name');
+});

@@ -1,9 +1,7 @@
 import { h } from 'preact';
-import preactHooks from 'preact/hooks';
-import { Bind, observable, setHooks } from '@jishida/react-mvvm';
+import { Bind, observable } from '@jishida/react-mvvm';
 import { mount } from 'enzyme';
-
-setHooks(preactHooks);
+import React from 'react';
 
 test(`preact without preact/compat`, () => {
   const text = observable('initial value');

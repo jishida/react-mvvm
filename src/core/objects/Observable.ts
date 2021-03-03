@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   ComputedOptions,
   DependencyValue,
@@ -11,7 +12,6 @@ import {
   _Container,
   _emptyArray,
 } from '../utils';
-import { _getHooks } from '../modules';
 import _Computed from './Computed';
 import { _ObservableOptions } from './interfaces';
 import _DependencyValue from './DependencyValue';
@@ -64,7 +64,7 @@ export default class _Observable<V>
   ) {
     const self = this;
     // eslint-disable-next-line func-names
-    return _getHooks().useCallback(function () {
+    return React.useCallback(function () {
       // eslint-disable-next-line prefer-rest-params
       const args = _argsToArray(arguments) as T;
       // eslint-disable-next-line prefer-spread
@@ -81,7 +81,7 @@ export default class _Observable<V>
     representFn: (value: V) => T,
     deps?: ReadonlyArray<any>
   ): DependencyValue<T> {
-    return _getHooks().useMemo<DependencyValue<T>>(
+    return React.useMemo<DependencyValue<T>>(
       () => new _Computed(undefined, representFn, [this as DependencyValue<V>]),
       deps || _emptyArray
     );

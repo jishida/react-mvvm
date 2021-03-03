@@ -1,4 +1,4 @@
-import React, { createRef } from 'react';
+import React from 'react';
 import { mount } from 'enzyme';
 import { Ref, ref, computed, observable } from '@jishida/react-mvvm';
 import {
@@ -75,7 +75,7 @@ test(`ref function`, () => {
 
 test(`bindRef with ReactRefObject`, () => {
   const sut = ref<HTMLInputElement>();
-  const refObject = createRef<HTMLInputElement>();
+  const refObject = React.createRef<HTMLInputElement>();
   expect(sut.ref.current).toBe(null);
   const wrapper = mount(<input ref={sut.bindRef(refObject)} />);
   expect(sut.ref.current).toBeTruthy();
