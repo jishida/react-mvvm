@@ -13,26 +13,29 @@ export default function BreedView() {
   );
   const { name, origin, weight, visible, toggle } = breed;
   return (
-    <div>
-      <Bind $type='button' onClick={toggle}>
-        {visible.to((v) => (v ? 'hide' : 'show'))}
-      </Bind>
-      <table>
+    <div className='breed-view'>
+      <div className='breed-header'>
+        <div className='breed-header-name'>{name}</div>
+        <Bind $type='button' onClick={toggle}>
+          {visible.to((v) => (v ? 'Hide' : 'Show'))}
+        </Bind>
+      </div>
+      <Bind
+        $type='table'
+        className='breed-table'
+        hidden={visible.to((v) => !v)}
+      >
         <tbody>
           <tr>
-            <td>Name</td>
-            <td>{name}</td>
-          </tr>
-          <Bind $type='tr' hidden={visible.to((v) => !v)}>
-            <td>Origin</td>
+            <th>Origin</th>
             <td>{origin}</td>
-          </Bind>
-          <Bind $type='tr' hidden={visible.to((v) => !v)}>
-            <td>Weight</td>
+          </tr>
+          <tr>
+            <th>Weight</th>
             <td>{weight} kg</td>
-          </Bind>
+          </tr>
         </tbody>
-      </table>
+      </Bind>
     </div>
   );
 }

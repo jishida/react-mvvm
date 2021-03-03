@@ -1,11 +1,11 @@
 name             | origin             | weight
-Himalayan        | China              | 2.7-3.6
+Chinchilla       | France             | 2.3-3.4
 Dwarf Hotot      | Germany            | 0.9-1.3
 Dwarf Lop        | Germany            | 1.9-2.3
-Netherland Dwarf | Netherlands        | 0.5.1.1
-Lionhead         | France and Belgium | 1.3-1.7
-Jersey Wooly     | United States      | 1.1-1.6
-Mini Satin       | United States      | 1.4-2.1
-Mini Rex         | United States      | 1.4-2.0
 Harlequin        | France             | 2.7-3.6
-Chinchilla       | France             | 2.3-3.4
+Himalayan        | China              | 2.7-3.6
+Jersey Wooly     | United States      | 1.1-1.6
+Lionhead         | France and Belgium | 1.3-1.7
+Mini Rex         | United States      | 1.4-2.0
+Mini Satin       | United States      | 1.4-2.1
+Netherland Dwarf | Netherlands        | 0.5.1.1

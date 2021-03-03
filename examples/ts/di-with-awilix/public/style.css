@@ -1,0 +1,67 @@
+.app-root {
+  width: 320px;
+}
+
+.animal-selector {
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.animal-selector-select {
+  width: 160px;
+}
+
+.animal-selector-select select {
+  display: block;
+  left: 10px;
+  width: 100%;
+  font-size: 1.1em;
+}
+
+.animal-selector-button {
+  margin-left: 10px;
+  width: 60px;
+}
+
+.animal-selector-button button {
+  width: 100%;
+}
+
+.breed-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 3px;
+}
+
+.breed-header-name {
+  flex-grow: 1;
+  font-weight: 500;
+}
+
+.breed-header button {
+  display: box;
+  width: 60px;
+}
+
+.breed-table {
+  border-collapse: collapse;
+  font-size: 0.9em;
+}
+
+.breed-table th,td {
+  border: solid 1px black;
+  padding: 3px 6px;
+}
+
+.breed-table th {
+  font-weight: 600;
+  width: 80px;
+  background-color: lightgray;
+}
+
+.breed-table td {
+  width: 160px;
+}
