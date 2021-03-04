@@ -21,7 +21,7 @@
     "esbuild": "^0.8.32"
   },
   "dependencies": {
-    "@jishida/react-mvvm": "^0.2.0",
+    "@jishida/react-mvvm": "^0.3.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1"
   }

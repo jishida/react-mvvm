@@ -12,7 +12,7 @@
     "parcel": "^2.0.0-beta.1"
   },
   "dependencies": {
-    "@jishida/react-mvvm": "^0.2.0",
+    "@jishida/react-mvvm": "^0.3.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1"
   },

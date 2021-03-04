@@ -1,0 +1,29 @@
+{
+  "private": true,
+  "name": "stopwatch",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "prebuild": "babel src -d build -x .ts,.tsx",
+    "build": "node build.js"
+  },
+  "author": "Junki Ishida",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "@babel/cli": "^7.12.10",
+    "@babel/core": "^7.12.10",
+    "@babel/plugin-proposal-class-properties": "^7.12.1",
+    "@babel/plugin-transform-runtime": "^7.12.10",
+    "@babel/preset-env": "^7.12.11",
+    "@babel/preset-react": "^7.12.10",
+    "@babel/preset-typescript": "^7.12.7",
+    "@babel/runtime": "^7.12.5",
+    "esbuild": "^0.8.32",
+    "preact": "^10.5.10"
+  },
+  "dependencies": {
+    "@jishida/react-mvvm": "^0.3.0",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
+  }
+}
