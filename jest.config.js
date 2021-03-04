@@ -66,7 +66,7 @@ if (match('preact-unique')) {
     testRegex: '/preact/[^/]*\\.spec\\.ts$',
     setupFilesAfterEnv: ['<rootDir>/tests/utils/setupEnzyme.ts'],
     moduleNameMapper: {
-      '^react$': 'preact',
+      '^react$': '<rootDir>/tests/utils/preactHooks.ts',
       '^@jishida/react-mvvm$': '<rootDir>/src',
       '^enzyme-adapter-react-16$': 'enzyme-adapter-preact-pure',
     },

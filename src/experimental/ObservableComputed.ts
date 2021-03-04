@@ -1,8 +1,8 @@
+import React from 'react';
 import { Computed, ComputedArgs, Observable } from '../interfaces';
 import { _applyBias } from '../core/utils';
 import {
   _DependencyValue,
-  _getHooks,
   _Observable,
   _ViewModelObjectOptions,
 } from '../core';
@@ -55,12 +55,11 @@ export default class _ObservableComputed<V, T extends ObservableTuple>
   }
 
   to<R>(representFn: (value: V) => R, deps?: ReadonlyArray<any>) {
-    const { useMemo, useEffect } = _getHooks();
-    const instance = useMemo(
+    const instance = React.useMemo(
       () => new _ObservableComputed({}, representFn, [this._observable]),
       deps || []
     );
-    useEffect(
+    React.useEffect(
       () => () => {
         instance.dispose();
       },

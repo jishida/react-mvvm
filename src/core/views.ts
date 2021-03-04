@@ -1,8 +1,7 @@
-import React, { createElement, FunctionComponent, ReactElement } from 'react';
+import React, { FunctionComponent, ReactElement } from 'react';
 import { DependencyValue } from '../interfaces';
 import { BindComponent, BindProps } from '../views';
 import { _useBind } from './hooks';
-import { _getHooks } from './modules';
 import { _assign, _emptyArray } from './utils';
 import { _DependencyValue, _Observable } from './objects';
 
@@ -53,8 +52,7 @@ function getBindData(this: BindProps<any, any>) {
 }
 
 function createBindElement(props: BindProps<any, any>, ref?: any) {
-  const { useMemo } = _getHooks();
-  const [observables, entries, childrenIsArray] = useMemo(
+  const [observables, entries, childrenIsArray] = React.useMemo(
     getBindData.bind(props),
     _emptyArray
   );
@@ -72,20 +70,20 @@ function createBindElement(props: BindProps<any, any>, ref?: any) {
       p[name] = prop.value;
     }
   });
-  return createElement($type, p);
+  return React.createElement($type, p);
 }
 
-const { memo } = React as {
-  memo?: (base: BindComponent) => BindComponent;
-};
-
-const { forwardRef } = React as {
-  forwardRef?: (
-    render: (props: any, ref: any) => ReactElement | null
-  ) => FunctionComponent;
-};
-
 export function _createBindComponent(displayName: string) {
+  const { memo } = React as {
+    memo?: (base: BindComponent) => BindComponent;
+  };
+
+  const { forwardRef } = React as {
+    forwardRef?: (
+      render: (props: any, ref: any) => ReactElement | null
+    ) => FunctionComponent;
+  };
+
   const component = (typeof forwardRef === 'function'
     ? forwardRef((props: any, ref: any) => createBindElement(props, ref))
     : (props: any) => createBindElement(props)) as BindComponent;

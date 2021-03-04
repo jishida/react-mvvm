@@ -138,13 +138,13 @@ The lite version of the build does not include proxy, validatable, parsable, and
 
 full:
 
-![](https://img.shields.io/badge/minified%20size-15.2%20kB-blue.svg)
-![](https://img.shields.io/badge/gzipped%20size-4.1%20kB-blue.svg)
+![](https://img.shields.io/badge/minified%20size-15.1%20kB-blue.svg)
+![](https://img.shields.io/badge/gzipped%20size-4.0%20kB-blue.svg)
 
 lite:
 
-![](https://img.shields.io/badge/minified%20size-5.3%20kB-blue.svg)
-![](https://img.shields.io/badge/gzipped%20size-1.9%20kB-blue.svg)
+![](https://img.shields.io/badge/minified%20size-5.2%20kB-blue.svg)
+![](https://img.shields.io/badge/gzipped%20size-1.8%20kB-blue.svg)
 
 <!--- end file size scope --->
 
@@ -167,13 +167,13 @@ import ReactMVVM from '@jishida/react-mvvm/lite';
 full:
 
 ```html
-<script crossorigin src="https://unpkg.com/@jishida/react-mvvm@0.2/dist/react-mvvm.min.js"></script>
+<script crossorigin src="https://unpkg.com/@jishida/react-mvvm@0.3/dist/react-mvvm.min.js"></script>
 ```
 
 lite:
 
 ```html
-<script crossorigin src="https://unpkg.com/@jishida/react-mvvm@0.2/dist/react-mvvm-lite.min.js"></script>
+<script crossorigin src="https://unpkg.com/@jishida/react-mvvm@0.3/dist/react-mvvm-lite.min.js"></script>
 ```
 
 ## Browser Support

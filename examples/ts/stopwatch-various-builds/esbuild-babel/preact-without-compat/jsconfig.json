@@ -1,0 +1,8 @@
+{
+  "compilerOptions": {
+    "paths": {
+      "react": ["./build/shims/preact.js"],
+      "react-dom": ["./build/shims/preact.js"]
+    }
+  }
+}

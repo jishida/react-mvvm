@@ -3,7 +3,6 @@ import {
   Computed,
   observable,
   ObservableOptions,
-  setHooks,
   useBind,
 } from '@jishida/react-mvvm';
 import {
@@ -12,12 +11,10 @@ import {
 } from '../utils/options';
 
 const mockHooks = {
-  useMemo: jest.fn(React.useMemo),
-  useState: jest.fn(React.useState),
-  useEffect: jest.fn(React.useEffect),
+  useMemo: (React.useMemo = jest.fn(React.useMemo)),
+  useState: (React.useState = jest.fn(React.useState)),
+  useEffect: (React.useEffect = jest.fn(React.useEffect)),
 };
-
-setHooks(mockHooks as any);
 
 afterEach(() => {
   mockHooks.useMemo.mockReset();
@@ -65,14 +62,16 @@ test.each(getObservableOptionsCases())(
       );
       expect(mockHooks.useState).toBeCalledTimes(expected.useStateCalledTimes);
       expect(effectMocks.length).toBe(expected.useEffectCalledTimes);
-      expect(mockHooks.useState.mock.calls.length).toBe(setters.length);
+      expect((mockHooks.useState as any).mock.calls.length).toBe(
+        setters.length
+      );
       setters.forEach((setter: any, i) => {
         expect(setter.mock.calls).toEqual(expected.setterCalls[i]);
       });
     }
 
     mockHooks.useMemo.mockImplementation((f: () => any) => f());
-    mockHooks.useEffect.mockImplementation((onMount) =>
+    mockHooks.useEffect.mockImplementation((onMount: any) =>
       effectMocks.push(new UseEffectMock(onMount))
     );
     mockHooks.useState.mockImplementation(() => {
@@ -154,7 +153,7 @@ test.each(getObservableOptionsCases())(
         if (!memo) {
           memo = f();
         }
-        return memo;
+        return memo as any;
       }
     );
     const sut = obj.to((s) => Number.parseInt(s, 16), useMemoDeps);

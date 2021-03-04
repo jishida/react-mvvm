@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   ComputedArgs,
   Computed,
@@ -5,7 +6,6 @@ import {
   DependencyTuple,
   Observable,
 } from '../../interfaces';
-import { _getHooks } from '../modules';
 import { _applyBias, _emptyArray } from '../utils';
 import _DependencyValue from './DependencyValue';
 import { _ComputedOptions } from './interfaces';
@@ -44,7 +44,7 @@ export default class _Computed<V, D extends DependencyTuple>
   }
 
   to<T>(representFn: (value: V) => T, deps?: ReadonlyArray<any>) {
-    return _getHooks().useMemo(
+    return React.useMemo(
       () => new _Computed({}, representFn, [this as DependencyValue<V>]),
       deps || _emptyArray
     );

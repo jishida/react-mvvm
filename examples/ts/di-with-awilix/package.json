@@ -31,7 +31,7 @@
   },
   "dependencies": {
     "@jishida/react-awilix": "^0.1.0",
-    "@jishida/react-mvvm": "^0.2.0",
+    "@jishida/react-mvvm": "^0.3.0",
     "awilix": "^4.3.3",
     "axios": "^0.21.1",
     "react": "^16.14.0",

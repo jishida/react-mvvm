@@ -1,8 +1,0 @@
-{
-  "compilerOptions": {
-    "paths": {
-      "react": ["./node_modules/preact"],
-      "react-dom": ["./node_modules/preact"]
-    }
-  }
-}
