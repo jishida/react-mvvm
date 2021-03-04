@@ -7,6 +7,11 @@ const buildSrcDir = resolve(distDir, 'src');
 remove(buildSrcDir);
 
 buildExampleNames.forEach((name) => {
+  const jsDir = resolve(distDir, name, 'js');
+  remove(jsDir);
+});
+
+buildExampleNames.forEach((name) => {
   const src = resolve('examples/ts', name, 'src');
   const dest = resolve(buildSrcDir, name);
   copy(src, dest);
