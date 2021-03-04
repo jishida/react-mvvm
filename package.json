@@ -21,6 +21,7 @@
     "examples:dist:prebuild": "npm run script examples-dist-prebuild",
     "examples:dist:build": "cd examples/dist && npm install && npm run build",
     "examples:install": "npm run script examples-install",
+    "examples:clean": "npm run script examples-clean",
     "examples:update": "npm run script examples-update",
     "examples:update-stopwatch": "npm run script examples-update-stopwatch"
   },
