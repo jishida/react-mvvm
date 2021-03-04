@@ -10,7 +10,7 @@ module.exports = {
   },
   output: {
     path: __dirname,
-    filename: '[name]/index.js',
+    filename: '[name]/js/index.js',
   },
   module: {
     rules: [
