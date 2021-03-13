@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   ComputedArgs,
   Computed,
@@ -23,6 +24,7 @@ import {
   _argsToArray,
   _getComputedClass,
   _Observable,
+  _emptyArray,
 } from './core';
 // begin extensions scope
 import { ResolvedObject } from './proxy';
@@ -62,24 +64,24 @@ export function isViewModelObject(value: any): value is ViewModelObject {
 }
 
 // useBind overload
-export function useBind(
-  ...observables: ReadonlyArray<DependencyValue<any>>
-): void;
+export function useBind(...deps: ReadonlyArray<DependencyValue<any>>): void;
 
 // useBind implementation
 export function useBind() {
   // eslint-disable-next-line prefer-rest-params
-  const values: DependencyValue<any>[] = _argsToArray(arguments);
-  _useBind(
-    values.reduce<_Observable<any>[]>((observables, value) => {
-      value.deps.forEach((dep) => {
-        if (dep instanceof _Observable && !observables.some((o) => o === dep)) {
-          observables.push(dep);
+  const args = arguments;
+  const observables = React.useMemo(() => {
+    const depValues: DependencyValue<any>[] = _argsToArray(args);
+    return depValues.reduce<_Observable<any>[]>((arr, depValue) => {
+      depValue.deps.forEach((dep) => {
+        if (dep instanceof _Observable && !arr.some((o) => o === dep)) {
+          arr.push(dep);
         }
       });
-      return observables;
-    }, [])
-  );
+      return arr;
+    }, []);
+  }, _emptyArray);
+  _useBind(observables);
 }
 
 export function ref<E = HTMLElement>() {

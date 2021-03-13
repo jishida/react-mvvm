@@ -145,7 +145,7 @@ test(`Bind component - pass the same Observable object twice to a Bind component
 test(`useBind function - same deps`, () => {
   const a = observable('a');
   const b = observable('b');
-  const ab = computed((a, b) => `${a}+${b}`, [a, b]);
+  const ab = computed((aValue, bValue) => `${aValue}+${bValue}`, [a, b]);
 
   const Component = () => {
     useBind(a, b, ab);
