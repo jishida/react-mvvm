@@ -59,7 +59,9 @@ function createBindElement(props: BindProps<any, any>, ref?: any) {
   _useBind(observables);
   const p = _assign({}, props, (name) => name !== '$type');
   const { $type } = props;
-  p.ref = ref;
+  if (ref !== undefined) {
+    p.ref = ref;
+  }
   if (childrenIsArray) {
     p.children = props.children.slice();
   }
