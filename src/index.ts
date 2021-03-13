@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  ComputedArgs,
+  ValueTuple,
   Computed,
   ComputedOptions,
   DependencyTuple,
@@ -64,24 +64,29 @@ export function isViewModelObject(value: any): value is ViewModelObject {
 }
 
 // useBind overload
-export function useBind(...deps: ReadonlyArray<DependencyValue<any>>): void;
+export function useBind<D extends DependencyTuple>(...deps: D): ValueTuple<D>;
 
 // useBind implementation
 export function useBind() {
   // eslint-disable-next-line prefer-rest-params
   const args = arguments;
-  const observables = React.useMemo(() => {
+  const [values, observables] = React.useMemo(() => {
     const depValues: DependencyValue<any>[] = _argsToArray(args);
-    return depValues.reduce<_Observable<any>[]>((arr, depValue) => {
-      depValue.deps.forEach((dep) => {
-        if (dep instanceof _Observable && !arr.some((o) => o === dep)) {
-          arr.push(dep);
-        }
-      });
-      return arr;
-    }, []);
+    const bindObservables = depValues.reduce<_Observable<any>[]>(
+      (arr, depValue) => {
+        depValue.deps.forEach((dep) => {
+          if (dep instanceof _Observable && !arr.some((o) => o === dep)) {
+            arr.push(dep);
+          }
+        });
+        return arr;
+      },
+      []
+    );
+    return [depValues, bindObservables];
   }, _emptyArray);
   _useBind(observables);
+  return values.map((v) => v.value);
 }
 
 export function ref<E = HTMLElement>() {
@@ -89,30 +94,30 @@ export function ref<E = HTMLElement>() {
 }
 // computed overloads
 export function computed<V, D extends DependencyTuple>(
-  computeFn: (...args: ComputedArgs<D>) => V,
+  computeFn: (...args: ValueTuple<D>) => V,
   deps: D,
   options?: Optional<'result', true> & Optional<'ref', false>
 ): Computed<V> & Result<V>;
 export function computed<V, D extends DependencyTuple>(
-  computeFn: (...args: ComputedArgs<D>) => V,
+  computeFn: (...args: ValueTuple<D>) => V,
   deps: D,
   options: Mandatory<'result', false> & Optional<'ref', false>
 ): Computed<V>;
 
 export function computed<V, D extends DependencyTuple, E = HTMLElement>(
-  computeFn: (...args: ComputedArgs<D>) => V,
+  computeFn: (...args: ValueTuple<D>) => V,
   deps: D,
   options: Mandatory<'ref', true> & Optional<'result', true>
 ): Computed<V> & Result<V> & Ref<E>;
 export function computed<V, D extends DependencyTuple, E = HTMLElement>(
-  computeFn: (...args: ComputedArgs<D>) => V,
+  computeFn: (...args: ValueTuple<D>) => V,
   deps: D,
   options: Mandatory<'result', false> & Mandatory<'ref', true>
 ): Computed<V> & Ref<E>;
 
 // computed implementation
 export function computed<V, D extends DependencyTuple>(
-  computeFn: (...args: ComputedArgs<D>) => V,
+  computeFn: (...args: ValueTuple<D>) => V,
   deps: D,
   options?: ComputedOptions
 ) {

@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  ComputedArgs,
+  ValueTuple,
   Computed,
   DependencyValue,
   DependencyTuple,
@@ -15,13 +15,13 @@ export default class _Computed<V, D extends DependencyTuple>
   implements Computed<V> {
   readonly _valueSources: ReadonlyArray<DependencyValue<any>>;
 
-  readonly _compute: (...args: ComputedArgs<D>) => V;
+  readonly _compute: (...args: ValueTuple<D>) => V;
 
   readonly deps: ReadonlyArray<Observable<any>>;
 
   constructor(
     options: _ComputedOptions | undefined,
-    computeFn: (...args: ComputedArgs<D>) => V,
+    computeFn: (...args: ValueTuple<D>) => V,
     deps: D
   ) {
     super(_applyBias(0x02, options));
@@ -39,7 +39,7 @@ export default class _Computed<V, D extends DependencyTuple>
   }
 
   get value() {
-    const values = this._valueSources.map((o) => o.value) as ComputedArgs<D>;
+    const values = this._valueSources.map((o) => o.value) as ValueTuple<D>;
     return this._compute(...values);
   }
 

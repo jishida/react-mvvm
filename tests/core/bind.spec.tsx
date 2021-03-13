@@ -148,12 +148,12 @@ test(`useBind function - same deps`, () => {
   const ab = computed((aValue, bValue) => `${aValue}+${bValue}`, [a, b]);
 
   const Component = () => {
-    useBind(a, b, ab);
+    const [aValue, bValue, abValue] = useBind(a, b, ab);
     return (
       <ul>
-        <li>{a.value}</li>
-        <li>{b.value}</li>
-        <li>{ab.value}</li>
+        <li>{aValue}</li>
+        <li>{bValue}</li>
+        <li>{abValue}</li>
       </ul>
     );
   };

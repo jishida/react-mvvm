@@ -82,18 +82,18 @@ export interface Observable<V> extends DependencyValue<V>, Representable<V> {
   ): Computed<T> & Ref<E>;
 }
 
-export type ComputedArgsBase<
+export type DependencyTuple = [DependencyValue<any>, ...DependencyValue<any>[]];
+
+export type ValueTupleBase<
   D extends DependencyValue<any>[],
   A extends any[]
 > = D extends [DependencyValue<infer V>, ...infer R]
   ? R extends DependencyValue<any>[]
-    ? ComputedArgsBase<[...R], [...A, V]>
+    ? ValueTupleBase<[...R], [...A, V]>
     : never
   : A;
 
-export type DependencyTuple = [DependencyValue<any>, ...DependencyValue<any>[]];
-
-export type ComputedArgs<D extends DependencyTuple> = ComputedArgsBase<D, []>;
+export type ValueTuple<D extends DependencyTuple> = ValueTupleBase<D, []>;
 
 export type ObservableOptions = Optional<'ref' | 'result'>;
 

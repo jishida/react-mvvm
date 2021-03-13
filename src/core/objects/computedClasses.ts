@@ -1,9 +1,9 @@
 import { _ComputedOptions, _ObservableOptions } from './interfaces';
 import {
-  ComputedArgs,
   Computed,
   ComputedOptions,
   DependencyTuple,
+  ValueTuple,
 } from '../../interfaces';
 import _ViewModelObject from './ViewModelObject';
 import _Computed from './Computed';
@@ -13,11 +13,11 @@ import { _getClassIndex } from '../utils';
 
 type ComputedClass<V, D extends DependencyTuple> = new (
   options: _ComputedOptions | undefined,
-  computeFn: (...args: ComputedArgs<D>) => V,
+  computeFn: (...args: ValueTuple<D>) => V,
   deps: D
 ) => _ViewModelObject & Computed<V>;
 type ComputedClassArgs<V, D extends DependencyTuple> = [
-  (...args: ComputedArgs<D>) => V,
+  (...args: ValueTuple<D>) => V,
   D
 ];
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Computed, ComputedArgs, Observable } from '../interfaces';
+import { Computed, ValueTuple, Observable } from '../interfaces';
 import { _applyBias } from '../core/utils';
 import {
   _DependencyValue,
@@ -32,13 +32,13 @@ export default class _ObservableComputed<V, T extends ObservableTuple>
 
   constructor(
     options: _ViewModelObjectOptions,
-    computeFn: (...args: ComputedArgs<T>) => V,
+    computeFn: (...args: ValueTuple<T>) => V,
     deps: T
   ) {
     super(_applyBias(0x20, options));
     this._deps = deps.slice() as T;
     this._compute = () =>
-      computeFn(...(this._deps.map((dep) => dep.value) as ComputedArgs<T>));
+      computeFn(...(this._deps.map((dep) => dep.value) as ValueTuple<T>));
     const _initialValue = this._compute();
     this._observable = new _Observable({ _initialValue });
     this._deps.forEach((dep) => {
