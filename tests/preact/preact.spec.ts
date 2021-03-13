@@ -1,7 +1,6 @@
 import { h } from 'preact';
 import { Bind, observable } from '@jishida/react-mvvm';
 import { mount } from 'enzyme';
-import React from 'react';
 
 test(`preact without preact/compat`, () => {
   const text = observable('initial value');
