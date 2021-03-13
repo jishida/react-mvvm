@@ -138,12 +138,12 @@ The lite version of the build does not include proxy, validatable, parsable, and
 
 full:
 
-![](https://img.shields.io/badge/minified%20size-15.1%20kB-blue.svg)
+![](https://img.shields.io/badge/minified%20size-15.2%20kB-blue.svg)
 ![](https://img.shields.io/badge/gzipped%20size-4.0%20kB-blue.svg)
 
 lite:
 
-![](https://img.shields.io/badge/minified%20size-5.2%20kB-blue.svg)
+![](https://img.shields.io/badge/minified%20size-5.3%20kB-blue.svg)
 ![](https://img.shields.io/badge/gzipped%20size-1.8%20kB-blue.svg)
 
 <!--- end file size scope --->
