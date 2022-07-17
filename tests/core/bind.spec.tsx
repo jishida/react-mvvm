@@ -1,19 +1,24 @@
+import '@testing-library/jest-dom';
+
 import React from 'react';
 import { act } from 'react-dom/test-utils';
 import { Bind, computed, observable, useBind } from '@jishida/react-mvvm';
-import { mount } from 'enzyme';
+import { render } from '@testing-library/react';
 
 test(`Bind component - bind Observable to HTML tag`, () => {
   const initialValue = 'initial value';
   const text = observable(initialValue);
-  const wrapper = mount(<Bind $type='p'>{text}</Bind>);
-  expect(wrapper.find('p').text()).toBe(initialValue);
+  const { container } = render(<Bind $type='p'>{text}</Bind>);
+  const p = container.children[0];
+
+  expect(p.nodeName).toBe('P');
+  expect(p).toHaveTextContent(initialValue);
 
   const modifiedValue = 'modified value';
   act(() => {
     text.value = modifiedValue;
   });
-  expect(wrapper.find('p').text()).toBe(modifiedValue);
+  expect(p).toHaveTextContent(modifiedValue);
 });
 
 test(`Bind component - bind Observable to function component`, () => {
@@ -22,14 +27,17 @@ test(`Bind component - bind Observable to function component`, () => {
   }
   const initialValue = 'initial value';
   const text = observable(initialValue);
-  const wrapper = mount(<Bind $type={Text} text={text} />);
-  expect(wrapper.find('p').text()).toBe(initialValue);
+  const { container } = render(<Bind $type={Text} text={text} />);
+  const p = container.children[0];
+
+  expect(p.nodeName).toBe('P');
+  expect(p).toHaveTextContent(initialValue);
 
   const modifiedValue = 'modified value';
   act(() => {
     text.value = modifiedValue;
   });
-  expect(wrapper.find('p').text()).toBe(modifiedValue);
+  expect(p).toHaveTextContent(modifiedValue);
 });
 
 test(`Bind component - bind Observable to class based component`, () => {
@@ -43,14 +51,17 @@ test(`Bind component - bind Observable to class based component`, () => {
   }
   const initialValue = 'initial value';
   const text = observable(initialValue);
-  const wrapper = mount(<Bind $type={Text} text={text} />);
-  expect(wrapper.find('p').text()).toBe(initialValue);
+  const { container } = render(<Bind $type={Text} text={text} />);
+  const p = container.children[0];
+
+  expect(p.nodeName).toBe('P');
+  expect(p).toHaveTextContent(initialValue);
 
   const modifiedValue = 'modified value';
   act(() => {
     text.value = modifiedValue;
   });
-  expect(wrapper.find('p').text()).toBe(modifiedValue);
+  expect(p).toHaveTextContent(modifiedValue);
 });
 
 test(`Bind component - observable array`, () => {
@@ -66,21 +77,23 @@ test(`Bind component - observable array`, () => {
       )}
     </Bind>
   );
-  const wrapper = mount(<Component />);
+  const { container } = render(<Component />);
+  const ul = container.children[0];
 
-  expect(wrapper.find('li').length).toBe(1);
-  expect(wrapper.find('li').at(0).text()).toBe('uno');
+  expect(ul.nodeName).toBe('UL');
+  expect(ul.children.length).toBe(1);
+  expect(ul.children[0].nodeName).toBe('LI');
+  expect(ul.children[0]).toHaveTextContent('uno');
 
   items.value[0].text = 'one';
   items.value.push({ key: 2, text: 'two' }, { key: 3, text: 'three' });
   act(() => {
     items.notify();
   });
-  wrapper.update();
-  expect(wrapper.find('li').length).toBe(3);
-  expect(wrapper.find('li').at(0).text()).toBe('one');
-  expect(wrapper.find('li').at(1).text()).toBe('two');
-  expect(wrapper.find('li').at(2).text()).toBe('three');
+  expect(ul.children.length).toBe(3);
+  expect(ul.children[0]).toHaveTextContent('one');
+  expect(ul.children[1]).toHaveTextContent('two');
+  expect(ul.children[2]).toHaveTextContent('three');
 });
 
 test(`Bind component - observable array item`, () => {
@@ -97,11 +110,16 @@ test(`Bind component - observable array item`, () => {
       ))}
     </Bind>
   );
-  const wrapper = mount(<Component />);
+  const { container } = render(<Component />);
+  const dl = container.children[0];
 
-  expect(wrapper.find('dl').getDOMNode<HTMLDListElement>().hidden).toBe(false);
-  expect(wrapper.find('dt').text()).toBe(initialTerm);
-  expect(wrapper.find('dd').text()).toBe(initialDescription);
+  expect(dl.nodeName).toBe('DL');
+  expect(dl).not.toHaveAttribute('hidden');
+  expect(dl.children.length).toBe(2);
+  expect(dl.children[0].nodeName).toBe('DT');
+  expect(dl.children[0]).toHaveTextContent(initialTerm);
+  expect(dl.children[1].nodeName).toBe('DD');
+  expect(dl.children[1]).toHaveTextContent(initialDescription);
 
   const modifiedTerm = 'term 2';
   const modifiedDescription = 'description 2';
@@ -110,9 +128,9 @@ test(`Bind component - observable array item`, () => {
     term.value = modifiedTerm;
     description.value = modifiedDescription;
   });
-  expect(wrapper.find('dl').getDOMNode<HTMLDListElement>().hidden).toBe(true);
-  expect(wrapper.find('dt').text()).toBe(modifiedTerm);
-  expect(wrapper.find('dd').text()).toBe(modifiedDescription);
+  expect(dl).toHaveAttribute('hidden');
+  expect(dl.children[0]).toHaveTextContent(modifiedTerm);
+  expect(dl.children[1]).toHaveTextContent(modifiedDescription);
 });
 
 test(`Bind component - ref forwarded`, () => {
@@ -120,31 +138,34 @@ test(`Bind component - ref forwarded`, () => {
   const text = observable<string, HTMLInputElement>(initialValue, {
     ref: true,
   });
-  const wrapper = mount(
+  const { container } = render(
     <Bind $type='input' ref={text.ref} defaultValue={text} />
   );
-  expect(wrapper.find('input').getDOMNode<HTMLInputElement>()).toBe(
-    text.ref.current
-  );
-  expect(wrapper.find('input').getDOMNode<HTMLInputElement>().value).toBe(
-    initialValue
-  );
+  const input = container.children[0];
+
+  expect(input).toBe(text.ref.current);
+  expect(input.nodeName).toBe('INPUT');
+  expect(input).toHaveValue(initialValue);
 });
 
 test(`Bind component - pass the same Observable object twice to a Bind component`, () => {
   const className = observable('class-name');
-  const wrapper = mount(
+  const { container } = render(
     <Bind $type='p' className={className}>
       {className}
     </Bind>
   );
-  expect(wrapper.find('p').text()).toBe('class-name');
-  expect(wrapper.find('p').getDOMNode().className).toBe('class-name');
+  const p = container.children[0];
+  expect(p.nodeName).toBe('P');
+  expect(p).toHaveClass('class-name');
+  expect(p).toHaveTextContent('class-name');
 });
 
 test(`Bind component - no dependencies`, () => {
-  const wrapper = mount(<Bind $type='p'>test</Bind>);
-  expect(wrapper.find('p').text()).toBe('test');
+  const { container } = render(<Bind $type='p'>test</Bind>);
+  const p = container.children[0];
+  expect(p.nodeName).toBe('P');
+  expect(p).toHaveTextContent('test');
 });
 
 test(`useBind function - same deps`, () => {
@@ -163,27 +184,33 @@ test(`useBind function - same deps`, () => {
     );
   };
 
-  const wrapper = mount(<Component />);
-  expect(wrapper.find('li').length).toBe(3);
-  expect(wrapper.find('li').at(0).text()).toBe('a');
-  expect(wrapper.find('li').at(1).text()).toBe('b');
-  expect(wrapper.find('li').at(2).text()).toBe('a+b');
+  const { container } = render(<Component />);
+  const ul = container.children[0];
+
+  expect(ul.nodeName).toBe('UL');
+  expect(ul.children.length).toBe(3);
+  expect(ul.children[0].nodeName).toBe('LI');
+  expect(ul.children[0]).toHaveTextContent('a');
+  expect(ul.children[1].nodeName).toBe('LI');
+  expect(ul.children[1]).toHaveTextContent('b');
+  expect(ul.children[2].nodeName).toBe('LI');
+  expect(ul.children[2]).toHaveTextContent('a+b');
 
   act(() => {
     a.value = 'alpha';
   });
 
-  expect(wrapper.find('li').length).toBe(3);
-  expect(wrapper.find('li').at(0).text()).toBe('alpha');
-  expect(wrapper.find('li').at(1).text()).toBe('b');
-  expect(wrapper.find('li').at(2).text()).toBe('alpha+b');
+  expect(ul.children.length).toBe(3);
+  expect(ul.children[0]).toHaveTextContent('alpha');
+  expect(ul.children[1]).toHaveTextContent('b');
+  expect(ul.children[2]).toHaveTextContent('alpha+b');
 
   act(() => {
     b.value = 'bravo';
   });
 
-  expect(wrapper.find('li').length).toBe(3);
-  expect(wrapper.find('li').at(0).text()).toBe('alpha');
-  expect(wrapper.find('li').at(1).text()).toBe('bravo');
-  expect(wrapper.find('li').at(2).text()).toBe('alpha+bravo');
+  expect(ul.children.length).toBe(3);
+  expect(ul.children[0]).toHaveTextContent('alpha');
+  expect(ul.children[1]).toHaveTextContent('bravo');
+  expect(ul.children[2]).toHaveTextContent('alpha+bravo');
 });

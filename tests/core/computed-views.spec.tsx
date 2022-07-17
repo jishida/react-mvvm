@@ -1,6 +1,8 @@
+import '@testing-library/jest-dom';
+
 import React from 'react';
 import { Bind, computed, observable } from '@jishida/react-mvvm';
-import { mount } from 'enzyme';
+import { render, screen } from '@testing-library/react';
 
 test(`ComputedObject - to method`, () => {
   const three = observable(3);
@@ -8,6 +10,6 @@ test(`ComputedObject - to method`, () => {
   const sut = computed((a, b) => a * b, [three, five]);
 
   const Component = () => <Bind $type='p'>{sut.to((n) => n * 7)}</Bind>;
-  const wrapper = mount(<Component />);
-  expect(wrapper.find('p').text()).toBe('105');
+  render(<Component />);
+  expect(screen.getByText('105')).toBeInTheDocument();
 });

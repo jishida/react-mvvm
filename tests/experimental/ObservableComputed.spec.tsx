@@ -1,5 +1,7 @@
+import '@testing-library/jest-dom';
+
 import React from 'react';
-import { mount } from 'enzyme';
+import { render, screen } from '@testing-library/react';
 import { act } from 'react-dom/test-utils';
 import { observable, Bind } from '@jishida/react-mvvm';
 import { _ObservableComputed } from '../../src/experimental';
@@ -37,8 +39,8 @@ test(`ObservableComputed`, async () => {
     notifyCount += 1;
   });
 
-  const wrapper = mount(
-    <ul>
+  render(
+    <ul role='target'>
       <Bind $type='li'>{left}</Bind>
       <Bind $type='li'>{right}</Bind>
       <Bind $type='li'>{sut}</Bind>
@@ -52,9 +54,15 @@ test(`ObservableComputed`, async () => {
     expect(notifyCount).toBe(expected.nofifyCount);
     expect(leftNotifyCount).toBe(expected.leftNotifyCount);
     expect(rightNotifyCount).toBe(expected.rightNotifyCount);
-    expect(wrapper.find('li').at(0).text()).toBe(`${expected.leftValue}`);
-    expect(wrapper.find('li').at(1).text()).toBe(`${expected.rightValue}`);
-    expect(wrapper.find('li').at(2).text()).toBe(`${expected.value}`);
+    expect(screen.getByRole('target').children[0]).toHaveTextContent(
+      `${expected.leftValue}`
+    );
+    expect(screen.getByRole('target').children[1]).toHaveTextContent(
+      `${expected.rightValue}`
+    );
+    expect(screen.getByRole('target').children[2]).toHaveTextContent(
+      `${expected.value}`
+    );
   }
 
   testCurrent();

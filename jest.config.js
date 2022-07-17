@@ -31,14 +31,26 @@ if (match('internal')) {
 
 if (match('react')) {
   projects.push({
-    displayName: 'React Test',
+    displayName: 'React v16 Test',
     testRegex: '/(core|extensions|internal)/[^/]*\\.spec\\.tsx$',
-    setupFilesAfterEnv: [
-      '<rootDir>/tests/utils/setupEnzyme.ts',
-      '<rootDir>/tests/utils/setupExtensions.ts',
-    ],
+    setupFilesAfterEnv: ['<rootDir>/tests/utils/setupExtensions.ts'],
     moduleNameMapper: {
       '^@jishida/react-mvvm$': '<rootDir>/src',
+    },
+  });
+}
+
+if (match('react17')) {
+  projects.push({
+    displayName: 'React v17 Test',
+    testRegex: '/(core|extensions|internal)/[^/]*\\.spec\\.tsx$',
+    setupFilesAfterEnv: ['<rootDir>/tests/utils/setupExtensions.ts'],
+    moduleNameMapper: {
+      '^@jishida/react-mvvm$': '<rootDir>/src',
+      '^react$': 'react17',
+      '^react-dom$': 'react-dom17',
+      '^react-dom/test-utils$': 'react-dom17/test-utils',
+      '^react-test-renderer$': 'react-test-renderer17',
     },
   });
 }
@@ -47,15 +59,12 @@ if (match('preact')) {
   projects.push({
     displayName: 'Preact Test',
     testRegex: '/(core|extensions|internal)/[^/]*\\.spec\\.tsx$',
-    setupFilesAfterEnv: [
-      '<rootDir>/tests/utils/setupEnzyme.ts',
-      '<rootDir>/tests/utils/setupExtensions.ts',
-    ],
+    setupFilesAfterEnv: ['<rootDir>/tests/utils/setupExtensions.ts'],
     moduleNameMapper: {
       '^@jishida/react-mvvm$': '<rootDir>/src',
       '^react$': 'preact/compat',
       '^react-dom/test-utils$': 'preact/test-utils',
-      '^enzyme-adapter-react-16$': 'enzyme-adapter-preact-pure',
+      '^@testing-library/react$': '@testing-library/preact',
     },
   });
 }
@@ -64,11 +73,9 @@ if (match('preact-unique')) {
   projects.push({
     displayName: 'Preact Unique Test',
     testRegex: '/preact/[^/]*\\.spec\\.ts$',
-    setupFilesAfterEnv: ['<rootDir>/tests/utils/setupEnzyme.ts'],
     moduleNameMapper: {
       '^react$': '<rootDir>/tests/utils/preactHooks.ts',
       '^@jishida/react-mvvm$': '<rootDir>/src',
-      '^enzyme-adapter-react-16$': 'enzyme-adapter-preact-pure',
     },
   });
 }
@@ -98,10 +105,7 @@ if (match('experimental', true)) {
   projects.push({
     displayName: 'Experimental Test',
     testRegex: '/experimental/[^/]*\\.spec\\.tsx?$',
-    setupFilesAfterEnv: [
-      '<rootDir>/tests/utils/setupEnzyme.ts',
-      '<rootDir>/tests/utils/setupExtensions.ts',
-    ],
+    setupFilesAfterEnv: ['<rootDir>/tests/utils/setupExtensions.ts'],
     moduleNameMapper: {
       '^@jishida/react-mvvm$': '<rootDir>/src',
     },

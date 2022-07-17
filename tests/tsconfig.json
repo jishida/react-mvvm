@@ -5,7 +5,8 @@
     "target": "esnext",
     "module": "esnext",
     "esModuleInterop": true,
-    "types": ["react", "react-dom", "jest", "enzyme"],
+    "lib": ["es6", "dom", "es2017"],
+    "types": ["react", "react-dom", "jest"],
     "paths": {
       "@jishida/react-mvvm": ["../src"],
       "@jishida/react-mvvm/impl": ["../src/impl"],
