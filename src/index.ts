@@ -19,12 +19,11 @@ import {
   _getObservableClass,
   _useBind,
   _createBindComponent,
-  _ViewModelObject,
   _Ref,
   _argsToArray,
   _getComputedClass,
-  _Observable,
   _emptyArray,
+  _isViewModelObject,
 } from './core';
 // begin extensions scope
 import { ResolvedObject } from './proxy';
@@ -59,9 +58,9 @@ export const Bind: BindComponent = _createBindComponent('Bind');
 
 export const DOMBind: DOMBindComponent = _createBindComponent('DOMBind');
 
-export function isViewModelObject(value: any): value is ViewModelObject {
-  return value instanceof _ViewModelObject;
-}
+export const isViewModelObject: (
+  value: any
+) => value is ViewModelObject = _isViewModelObject;
 
 // useBind overload
 export function useBind<D extends DependencyTuple>(...deps: D): ValueTuple<D>;
@@ -72,10 +71,10 @@ export function useBind() {
   const args = arguments;
   const [values, observables] = React.useMemo(() => {
     const depValues: DependencyValue<any>[] = _argsToArray(args);
-    const bindObservables = depValues.reduce<_Observable<any>[]>(
+    const bindObservables = depValues.reduce<Observable<any>[]>(
       (arr, depValue) => {
         depValue.deps.forEach((dep) => {
-          if (dep instanceof _Observable && !arr.some((o) => o === dep)) {
+          if (!arr.some((o) => o === dep)) {
             arr.push(dep);
           }
         });

@@ -7,15 +7,15 @@ import {
 } from '../interfaces';
 import { BuiltinProxyFilter, ProxyFilter, ViewModelProxy } from '../proxy';
 import { Validatable } from '../validators';
-import { _ViewModelObject } from '../core';
+import { _isViewModelObject } from '../core';
 
-function testSpec<O extends ViewModelObject | void>(
+function testObjType<O extends ViewModelObject | void>(
   prop: any,
   filter: number,
   compareFn: (n: number) => boolean
 ): prop is O {
-  if (prop instanceof _ViewModelObject) {
-    return compareFn((prop as ViewModelObject).spec & filter);
+  if (_isViewModelObject(prop)) {
+    return compareFn(prop.$$vmObjType & filter);
   }
   return false;
 }
@@ -35,8 +35,8 @@ function createProxy<
   Object.keys(viewModel).forEach((name) => {
     const prop = (viewModel as any)[name];
     if (
-      testSpec<I>(prop, include, (n) => n === include) &&
-      (!exclude || !testSpec<E>(prop, exclude, (n) => !!n))
+      testObjType<I>(prop, include, (n) => n === include) &&
+      (!exclude || !testObjType<E>(prop, exclude, (n) => !!n))
     ) {
       Object.defineProperty(proxy, name, {
         get: getFn.bind(viewModel, prop, name),
@@ -81,7 +81,7 @@ function getBuiltinProxy<VM extends ViewModel>(
     case 'result':
       include = 0x08;
       getFn = (prop: Result<unknown>) =>
-        prop.spec & 0x10 &&
+        prop.$$vmObjType & 0x10 &&
         !((prop as unknown) as Validatable<unknown>).validator.enabled
           ? undefined
           : prop.result;

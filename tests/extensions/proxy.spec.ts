@@ -420,7 +420,7 @@ test(`proxy - unsupported builtin filter`, () => {
 });
 test(`proxy - no filter`, () => {
   const store = new ProxyViewModel();
-  const sut = proxy(store, (obj) => obj.spec);
+  const sut = proxy(store, (obj) => obj.$$vmObjType);
   expect(sut).toStrictEqual({
     _ref: 0x80,
     _observable: 0x07,

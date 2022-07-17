@@ -142,6 +142,11 @@ test(`Bind component - pass the same Observable object twice to a Bind component
   expect(wrapper.find('p').getDOMNode().className).toBe('class-name');
 });
 
+test(`Bind component - no dependencies`, () => {
+  const wrapper = mount(<Bind $type='p'>test</Bind>);
+  expect(wrapper.find('p').text()).toBe('test');
+});
+
 test(`useBind function - same deps`, () => {
   const a = observable('a');
   const b = observable('b');

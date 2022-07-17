@@ -1,11 +1,8 @@
 import React from 'react';
 import { Computed, ValueTuple, Observable } from '../interfaces';
 import { _applyBias } from '../core/utils';
-import {
-  _DependencyValue,
-  _Observable,
-  _ViewModelObjectOptions,
-} from '../core';
+import { _Observable, _ViewModelObjectOptions } from '../core';
+import _DependencyValue from '../core/objects/DependencyValue';
 import { Disposable, ObservableTuple } from './interfaces';
 
 export default class _ObservableComputed<V, T extends ObservableTuple>

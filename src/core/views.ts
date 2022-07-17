@@ -1,20 +1,16 @@
 import React, { FunctionComponent, ReactElement } from 'react';
-import { DependencyValue } from '../interfaces';
+import { DependencyValue, Observable } from '../interfaces';
 import { BindComponent, BindProps } from '../views';
 import { _useBind } from './hooks';
-import { _assign, _emptyArray } from './utils';
-import { _DependencyValue, _Observable } from './objects';
+import { _assign, _emptyArray, _isViewModelObject } from './utils';
 
 function getBindData(this: BindProps<any, any>) {
   let childrenIsArray = false;
-  const observables: _Observable<any>[] = [];
+  const observables: Observable<any>[] = [];
   const entries: [string, number, DependencyValue<unknown>][] = [];
   function addProp(prop: any, name: string, index?: number) {
-    if (prop instanceof _DependencyValue) {
-      prop.deps.forEach((dep) => {
-        if (!(dep instanceof _Observable)) {
-          throw new Error('Illegal Observable instance');
-        }
+    if (_isViewModelObject(prop) && (prop.$$vmObjType & 0x03) === 0x03) {
+      (prop as DependencyValue<any>).deps.forEach((dep) => {
         if (!observables.some((o) => o === dep)) {
           observables.push(dep);
         }
@@ -45,7 +41,7 @@ function getBindData(this: BindProps<any, any>) {
     }
   });
   return [observables, entries, childrenIsArray] as [
-    _Observable<any>[],
+    Observable<any>[],
     [string, number, DependencyValue<unknown>][],
     boolean
   ];

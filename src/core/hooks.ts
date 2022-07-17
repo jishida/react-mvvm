@@ -1,5 +1,5 @@
 import React from 'react';
-import { _Observable } from './objects';
+import { Observable } from '../interfaces';
 import { _emptyArray } from './utils';
 
 interface Observer {
@@ -9,7 +9,7 @@ interface Observer {
 
 const initialState = {};
 
-function getUseBindData(this: ReadonlyArray<_Observable<any>>) {
+function getUseBindData(this: ReadonlyArray<Observable<any>>) {
   const observer = {} as Observer;
   observer._update = () => {
     observer._setState({});
@@ -29,7 +29,7 @@ function getUseBindData(this: ReadonlyArray<_Observable<any>>) {
   ] as [Observer, () => () => void];
 }
 
-export function _useBind(observables: ReadonlyArray<_Observable<any>>) {
+export function _useBind(observables: ReadonlyArray<Observable<any>>) {
   if (observables.length) {
     const [observer, effect] = React.useMemo(
       getUseBindData.bind(observables),

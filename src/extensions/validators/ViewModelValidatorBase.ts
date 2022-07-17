@@ -8,7 +8,7 @@ import {
   ViewModelValidatorOptions,
 } from '../../validators';
 import _ValidationBase from './ValidationBase';
-import { _argsToArray, _ViewModelObject } from '../../core';
+import { _argsToArray, _isViewModelObject } from '../../core';
 
 function increment(
   map: Map<ValidatorBase, number>,
@@ -72,7 +72,7 @@ export default abstract class _ViewModelValidatorBase<Async extends boolean>
   }
 
   private _isAvailableObject(obj: any): obj is Validatable<any, any> {
-    return obj instanceof _ViewModelObject && (obj.spec & this._mask) === 0x10;
+    return _isViewModelObject(obj) && (obj.$$vmObjType & this._mask) === 0x10;
   }
 
   private _isAvailableValidator(instance: any): instance is ValidatorBase {

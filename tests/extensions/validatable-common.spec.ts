@@ -53,7 +53,7 @@ test.each(syncValidatableCases)(
     expect(sut.validate()).toBe(false);
     expect(sut.hasError.value).toBe(true);
     expect(sut.errorMessage.value).toBe(errorMessage);
-    if (sut.spec & 0x08) {
+    if (sut.$$vmObjType & 0x08) {
       expect(() => (sut as any).result).toThrowError(VALIDATION_FAILURE);
     }
   }
@@ -75,7 +75,7 @@ test.each(asyncValidatableCases)(
     expect(await sut.validate()).toBe(false);
     expect(sut.hasError.value).toBe(true);
     expect(sut.errorMessage.value).toBe(errorMessage);
-    if (sut.spec & 0x08) {
+    if (sut.$$vmObjType & 0x08) {
       await expect((sut as any).result).rejects.toThrowError(
         VALIDATION_FAILURE
       );
@@ -100,7 +100,7 @@ test.each(syncValidatableCases)(
     expect(sut.validate()).toBe(false);
     expect(sut.hasError.value).toBe(true);
     expect(sut.errorMessage.value).toBe(errorMessage);
-    if (sut.spec & 0x08) {
+    if (sut.$$vmObjType & 0x08) {
       expect(() => (sut as any).result).toThrowError(VALIDATION_FAILURE);
     }
   }
@@ -123,7 +123,7 @@ test.each(asyncValidatableCases)(
     expect(await sut.validate()).toBe(false);
     expect(sut.hasError.value).toBe(true);
     expect(sut.errorMessage.value).toBe(errorMessage);
-    if (sut.spec & 0x08) {
+    if (sut.$$vmObjType & 0x08) {
       await expect((sut as any).result).rejects.toThrowError(
         VALIDATION_FAILURE
       );
@@ -147,7 +147,7 @@ test.each(syncValidatableCases)(
     expect(sut.validate()).toBe(false);
     expect(sut.hasError.value).toBe(true);
     expect(sut.errorMessage.value).toBe('');
-    if (sut.spec & 0x08) {
+    if (sut.$$vmObjType & 0x08) {
       expect(() => (sut as any).result).toThrowError('Validation failure');
     }
   }
@@ -169,7 +169,7 @@ test.each(asyncValidatableCases)(
     expect(await sut.validate()).toBe(false);
     expect(sut.hasError.value).toBe(true);
     expect(sut.errorMessage.value).toBe('');
-    if (sut.spec & 0x08) {
+    if (sut.$$vmObjType & 0x08) {
       await expect((sut as any).result).rejects.toThrowError(
         VALIDATION_FAILURE
       );

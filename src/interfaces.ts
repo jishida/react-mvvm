@@ -22,7 +22,7 @@ export interface ViewModelObject {
   // Parsable    : 0x20 | 0x1f
   // Async       : 0x40 | 0x10
   // Ref         : 0x80
-  readonly spec: number;
+  readonly $$vmObjType: number;
 }
 
 export interface ReactRefObject<T> {

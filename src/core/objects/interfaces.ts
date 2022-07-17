@@ -1,7 +1,7 @@
 import { ComputedOptions } from '../../interfaces';
 
 export interface _ViewModelObjectOptions {
-  _spec?: number;
+  _vmObjType?: number;
 }
 
 export interface _ObservableOptions<V> extends _ViewModelObjectOptions {

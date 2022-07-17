@@ -1,4 +1,4 @@
-import { ObservableOptions } from '../../interfaces';
+import { ObservableOptions, ViewModelObject } from '../../interfaces';
 import { _ViewModelObjectOptions } from '../objects/interfaces';
 
 export { default as _Container } from './Container';
@@ -29,7 +29,7 @@ export function _applyBias<O extends _ViewModelObjectOptions>(
   options?: O
 ) {
   const opts: _ViewModelObjectOptions = options || {};
-  opts._spec = (opts._spec || 0) | bias;
+  opts._vmObjType = (opts._vmObjType || 0) | bias;
   return opts as O;
 }
 
@@ -54,3 +54,11 @@ export function _argsToArray(args: IArguments, start?: number) {
 }
 
 export const _emptyArray = [];
+
+export function _isViewModelObject(value: any): value is ViewModelObject {
+  if (!value || typeof value !== 'object') {
+    return false;
+  }
+  const t = value.$$vmObjType;
+  return typeof t === 'number' && Number.isFinite(t);
+}

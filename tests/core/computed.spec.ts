@@ -14,7 +14,7 @@ test.each(computedOptionsCases)(
 
     expect(sut.deps).toStrictEqual([firstName, lastName]);
     expect(sut.value).toBe('John Doe');
-    if (sut.spec & 0x08) {
+    if (sut.$$vmObjType & 0x08) {
       expect(sut.result).toBe('John Doe');
     }
   }
@@ -33,7 +33,7 @@ test.each(computedOptionsCases)(
 
     expect(sut.deps).toStrictEqual([firstName, lastName]);
     expect(sut.value).toBe('John Doe');
-    if (sut.spec & 0x08) {
+    if (sut.$$vmObjType & 0x08) {
       expect(sut.result).toBe('John Doe');
     }
   }

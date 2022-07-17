@@ -1,10 +1,5 @@
 import React, { EffectCallback } from 'react';
-import {
-  Computed,
-  observable,
-  ObservableOptions,
-  useBind,
-} from '@jishida/react-mvvm';
+import { Computed, ObservableOptions, useBind } from '@jishida/react-mvvm';
 import {
   getObservableOptionsCases,
   ObservableObjectFactory,
@@ -122,19 +117,6 @@ test.each(getObservableOptionsCases())(
     testCurrent();
   }
 );
-
-test(`useBind function - invalid prototype`, () => {
-  mockHooks.useMemo.mockImplementation((factory) => factory());
-  const obj = observable('');
-  Object.setPrototypeOf(obj, {});
-  (obj as any).deps = [obj];
-
-  useBind(obj);
-
-  expect(mockHooks.useMemo).toBeCalledTimes(1);
-  expect(mockHooks.useEffect).not.toBeCalled();
-  expect(mockHooks.useState).not.toBeCalled();
-});
 
 test.each(getObservableOptionsCases())(
   `Observable (%s) - to method`,
