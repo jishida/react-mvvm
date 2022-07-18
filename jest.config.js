@@ -1,4 +1,5 @@
 require('dotenv').config();
+const presets = require('ts-jest/presets');
 
 function match(key, ignoreAll) {
   return process.env.TEST_TYPES.split(',').some(
@@ -121,8 +122,13 @@ test types: all, standard, internal, react, preact, preact-unique, module, modul
 
 module.exports = {
   projects: projects.map((project) => ({
-    preset: 'ts-jest',
     roots: ['<rootDir>/tests'],
+    testEnvironment: 'jsdom',
+    transform: {
+      '^.+\\.tsx?$': 'ts-jest',
+      '^.+\\.m?jsx?$': 'babel-jest',
+    },
+    transformIgnorePatterns: [`/node_modules/(?!preact)/`],
     globals: {
       'ts-jest': {
         tsconfig: 'tests/tsconfig.json',

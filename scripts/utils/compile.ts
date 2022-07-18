@@ -1,6 +1,6 @@
 import { resolve } from 'path';
 import { writeFileSync } from 'fs';
-import { execFileSync } from 'child_process';
+import { execFileSync, SpawnSyncReturns } from 'child_process';
 
 function tsconfig(key: string, options: any) {
   const file = resolve(`build/tsconfig.${key}.json`);
@@ -30,7 +30,7 @@ export default function compile(expr: string, opts: any) {
     execFileSync('node', args);
     console.log(`compiled '${key}'`);
   } catch (e) {
-    console.log(e.stdout.toString('utf8'));
+    console.log((e as SpawnSyncReturns<Buffer>).stdout.toString('utf8'));
     throw e;
   }
 }
