@@ -56,6 +56,23 @@ if (match('react17')) {
   });
 }
 
+if (match('react18')) {
+  projects.push({
+    displayName: 'React v18 Test',
+    testRegex: '/(core|extensions|internal)/[^/]*\\.spec\\.tsx$',
+    setupFilesAfterEnv: ['<rootDir>/tests/utils/setupExtensions.ts'],
+    moduleNameMapper: {
+      '^@jishida/react-mvvm$': '<rootDir>/src',
+      '^react$': 'react18',
+      '^react-dom$': 'react-dom18',
+      '^react-dom/client$': 'react-dom18/client',
+      '^react-dom/test-utils$': 'react-dom18/test-utils',
+      '^react-test-renderer$': 'react-test-renderer18',
+      '^@testing-library/react$': '@testing-library/react13',
+    },
+  });
+}
+
 if (match('preact')) {
   projects.push({
     displayName: 'Preact Test',
