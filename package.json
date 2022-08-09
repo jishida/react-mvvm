@@ -34,7 +34,7 @@
     "react-hooks",
     "viewmodel",
     "mvvm",
-    "state-manegement"
+    "state-management"
   ],
   "author": "Junki Ishida",
   "license": "Apache-2.0",

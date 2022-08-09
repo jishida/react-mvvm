@@ -77,7 +77,7 @@ import { Bind, observable, proxy } from '@jishida/react-mvvm';
 class IncrementViewModel {
   count = observable(0);
 
-  // proxy function needs to be called after the Observable bject has been created.
+  // proxy function needs to be called after all Observable objects have been created.
   state = proxy<IncrementViewModel>(this, 'state');
 
   increment = () => {
